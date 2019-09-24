@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Initial jekyll setup"
+title:  "Jekyll, part 1: Initial setup"
 date:   2019-09-23 19:46:00 +0200
 categories: jekyll
 ---
