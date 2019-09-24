@@ -36,6 +36,11 @@ The _config.yml is the configuration for the site and jekyll will use this while
 ## Run it
 You can view the page locally navigating into the project folder and running
 ```
-jekyll serve
+jekyll serve -w
 ```
-This command builds the site and runs a local version accessible at `localhost:4000`. Go check it out.
+This command builds the site and runs a local version accessible at `localhost:4000`. The `-w` switch (shorthand for `--watch`) enables jekyll to continuously monitor the directory and rebuild when changes are made. This way you don't have to restart the process every time you need the review a change.
+
+Go check it out.
+
+## Change it
+Now, the open *_config.yml* and change the title to something else than *Your awesome title*, because, honestly, that sucks. Change or comment out (place a \# at the beginning of the line) what else you see fit. Refresh the page in your browser.

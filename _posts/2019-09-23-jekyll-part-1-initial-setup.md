@@ -34,3 +34,5 @@ The output should be similar to
 jekyll 4.0.0
 ```
 That's it. Jekyll is installed and ready to use.
+
+Check out the next part here: [Jekyll, part 2: Generating a barebones page]({% post_url 2019-09-24-jekyll-part-2-generating-a-barebones-page %})
