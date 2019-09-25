@@ -2,7 +2,7 @@
 layout: post
 title:  "Jekyll, part 2: Generating a barebones page"
 date:   2019-09-24 18:30:00 +0200
-categories: jekyll
+categories: [jekyll]
 ---
 
 ## Preface
@@ -43,4 +43,4 @@ This command builds the site and runs a local version accessible at `localhost:4
 Go check it out.
 
 ## Change it
-Now, the open *_config.yml* and change the title to something else than *Your awesome title*, because, honestly, that sucks. Change or comment out (place a \# at the beginning of the line) what else you see fit. Refresh the page in your browser.
+Now, the open *_config.yml* and change the title to something else than *Your awesome title*, because, honestly, that sucks. Change or comment out (place a \# at the beginning of the line) what else you see fit. Refresh the page in your browser and there you have it.
