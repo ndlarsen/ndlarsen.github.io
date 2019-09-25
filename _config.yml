@@ -23,7 +23,7 @@ permalink: /:title/
 title: Miscellaneous scribbles
 #email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Just mostly tech related miscellaneous scribbles
+  Miscellaneous tech related scribbles
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "ndlarsen.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb
@@ -31,8 +31,8 @@ github_username:  ndlarsen
 
 # Build settings
 theme: minima
-#plugins:
-#  - jekyll-feed
+plugins:
+  - jekyll-feed
 
 # Exclude from processing.
 # The following items will not be processed, by default.
