@@ -8,7 +8,7 @@ categories: [jekyll]
 ## Preface
 This post will show you how to generate a barebones page and preview it locally.
 
-## Creating the page
+## Create it
 Jekyll comes with the functionality to generate a skeleton for your site. Suppose your new site project would be called "bitsAndPieces", you would generate the skeleton like this:
 ```
 jekyll new bitsAndPieces
@@ -44,3 +44,5 @@ Go check it out.
 
 ## Change it
 Now, the open *_config.yml* and change the title to something else than *Your awesome title*, because, honestly, that sucks. Change or comment out (place a \# at the beginning of the line) what else you see fit. Refresh the page in your browser and there you have it.
+
+Check out the next part here: [Jekyll, part 3: Creating posts]({% post_url 2019-09-25-jekyll-part-3-creating-posts %})
