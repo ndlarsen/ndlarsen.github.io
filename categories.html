@@ -1,0 +1,19 @@
+---
+layout: default
+title: Categories
+---
+
+<ul>
+    {% for category in site.categories %}
+    <li>
+        {{ category | first }}
+        <ul>
+            {% for post in category.last %}
+            <li>
+                <a href="{{ post.url }}">{{ post.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
