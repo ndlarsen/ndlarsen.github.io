@@ -13,7 +13,7 @@ Jekyll comes with the functionality to generate a skeleton for your site. Suppos
 ```
 jekyll new bitsAndPieces
 ```
-This will generate a folder named *bitsAndPieces* with content similar to the following:
+This will generate a folder named *bitsAndPieces* with contents similar to the following:
 ```
 bitsAndPieces:
 ├── _posts

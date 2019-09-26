@@ -25,3 +25,6 @@ git commit -m "Write a commit message here such as: Initial commit"
 git push
 ```
 Your new site should be available at https://username.github.io shortly after.
+
+In the next post I'll create a categories page using [Liquid](https://jekyllrb.com/docs/liquid/) templating language and it's available here:
+[Jekyll, part 5: Adding a categories page]({% post_url 2019-09-26-jekyll-part-5-adding-a-categories-page %})
