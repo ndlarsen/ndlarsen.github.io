@@ -36,4 +36,28 @@ jekyll serve -w
 ```
 from within the project folder and there you go.
 
-The next part will focus on using [github pages](https://pages.github.com/) as the hosting platform for your jekyll site.
+## Drafts
+From time to time might want to keep drafts in the project without having them displayed. Create a *_drafts* folder with the project and place your draft in there. Jekyll won't build those when building or previewing the side unless explicitly told to as below.
+```
+jekyll serve -w --draft
+```
+
+## Skeleton post
+I made a simple shell script to generate a basic skeleton post. I initially placed the script inside the *_scripts* folder in order to not display it.
+By running it as
+```
+./getDraft.sh "Post title" JekyllCategory OptionCategory
+```
+will output a file in the current folder which honours the naming convention with a Front Matter similar to the following:
+```
+---
+layout: post
+title: "First post"
+date: 2019-09-26 20:01:41 +0200
+categories: [SomeCategory,OptionalCategory]
+---
+```
+Use the script if you wish. It's available [here](https://github.com/ndlarsen/ndlarsen.github.io/blob/master/_scripts/genDraft.sh)
+
+The next part will focus on using [Github Pages](https://pages.github.com/) as the hosting platform for your jekyll site and can be found here:
+[Jekyll, part 4: Hosting at Github Pages]({% post_url 2019-09-26-jekyll-part-4-hosting-at-github-pages %})
