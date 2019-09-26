@@ -19,7 +19,7 @@ join_by(){
     echo "$*"
 }
 
-if [ $# -lt 2 ] || ( [ $# ] && [ "$1" == "help" ] )
+if [ $# -lt 2 ] || ( [ $# == 1 ] && [ "$1" == "help" ] )
 then
     print_help && exit
 fi
