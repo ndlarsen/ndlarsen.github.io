@@ -36,6 +36,7 @@ This file will serve as the category list and will eventually contain the templa
 In order to do this we need a plan and this will serve as a basic one.
 
 * get all categories for the site
+* sort them alphabetically in ascending order
 * for each category in categories
     * display category name
     * for each post in category
@@ -53,7 +54,8 @@ attributes documented offficially and this is just way too close to [tribal know
 ```html
 {% raw %}
 <ul>
-    {% for category in site.categories %}
+    {% assign sorted_categories = site.categories | sort %}
+    {% for category in sorted_categories %}
     <li>
         {{ category.first }}
         <ul>
