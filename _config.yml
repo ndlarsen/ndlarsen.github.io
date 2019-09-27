@@ -29,7 +29,8 @@ url: "ndlarsen.github.io" # the base hostname & protocol for your site, e.g. htt
 
 show_excerpts: true # set to true to show excerpts on the homepage
 
-github_username:  ndlarsen
+author: "Nicolas Damgaard Larsen"
+github_username: ndlarsen
 
 # minima settings
 minima:
@@ -40,6 +41,7 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-avatar
 
 # Exclude from processing.
 # The following items will not be processed, by default.
