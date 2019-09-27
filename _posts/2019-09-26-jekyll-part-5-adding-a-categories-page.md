@@ -53,21 +53,21 @@ attributes documented offficially and this is just way too close to [tribal know
 
 ```html
 {% raw %}
-<ul>
+<div id="archives">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    <li>
-        {{ category.first }}
+    <div>
+        <h3 class="post-list-heading">{{ category | first }}</h3>
         <ul>
             {% for post in category.last %}
             <li>
-                <a href="{{ post.url }}">{{ post.title }}</a>
+                <a href="{{ post.url }}" class="page-link">{{ post.title }}</a>
             </li>
             {% endfor %}
         </ul>
-    </li>
+    </div>
     {% endfor %}
-</ul>
+</div>
 {% endraw %}
 ```
 

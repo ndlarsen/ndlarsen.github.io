@@ -3,18 +3,18 @@ layout: default
 title: Categories
 ---
 
-<ul>
+<div id="archives">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    <li>
-        {{ category | first }}
+    <div>
+        <h3 class="post-list-heading">{{ category | first | capitalize }}</h3>
         <ul>
             {% for post in category.last %}
             <li>
-                <a href="{{ post.url }}">{{ post.title }}</a>
+                <a href="{{ post.url }}" class="page-link">{{ post.title }}</a>
             </li>
             {% endfor %}
         </ul>
-    </li>
+    </div>
     {% endfor %}
-</ul>
+</div>
