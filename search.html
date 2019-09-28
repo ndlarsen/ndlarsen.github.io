@@ -1,0 +1,23 @@
+---
+layout: default
+title: Search
+---
+
+<script type="text/javascript" src="/assets/lunr.js"></script>
+<script type="text/javascript" src="/assets/search-index.js"></script>
+<script type="text/javascript" src="/assets/search-helper.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', domOnLoadEventHandler);
+</script>
+
+<div>
+    <form action="/search/" method="get">
+        <input type="text" id="search-box" name="query" placeholder="Enter search criteria...">
+        <input type="submit" value="search">
+    </form>
+</div>
+
+<div id="result-container">
+    <h1 id="search-results-h" class="post-list-heading" style="display: none"></h1>
+</div>
