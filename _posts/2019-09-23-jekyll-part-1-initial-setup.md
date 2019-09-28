@@ -6,11 +6,13 @@ categories: [jekyll]
 ---
 
 ## Preface
+---
 I'm assuming you're running a Linux distribution. In my case it's Ubuntu 18.04. If you're running another distribution you should be able to figure out what commands your preferred distributions package managers equivalent commands are.
 
 Now, there are a jekyll package available from the repositories and while it might work just fine for your needs, it is quite outdated and as such we're going the gem route.
 
 ## Dependencies and initial setup
+---
 Install ruby:
 ```
 sudo apt-get install ruby-full
