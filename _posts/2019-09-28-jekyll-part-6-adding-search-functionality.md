@@ -187,4 +187,4 @@ function setTextAndDisplay(text){
 ```
 That's it, try it out.
 
-The next part of the series, ["Jekyll, part 7: Pagination"]({% post_url /2019-09-29-jekyll-part-7-pagination %}), will focus on adding pagination to the site.
+The next part of the series, [Jekyll, part 7: Pagination]({% post_url /2019-09-29-jekyll-part-7-pagination %}), will focus on adding pagination to the site.
