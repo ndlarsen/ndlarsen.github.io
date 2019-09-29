@@ -7,9 +7,7 @@ categories: [jekyll,liquid]
 
 ## Preface
 ---
-As the amount of posts grows, the amount of post on the index/front page grows as well, at least while using simple themes such as [Minima](https://github.com/jekyll/minima). In order to limit the amount of posts displayed on a single page, we need to add pagination. As with most other functionality you can think of exsisting plugins are available but again:
-
--- *Where is the fun in that?*
+As the amount of posts grows, the amount of post on the index/front page grows as well, at least while using simple themes such as [Minima](https://github.com/jekyll/minima). In order to limit the amount of posts displayed on a single page, we need to add pagination. This functionality is available from some og the more advanced themes but again, Where is the fun in that?
 
 ## Setup
 ---
