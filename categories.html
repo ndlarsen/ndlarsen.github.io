@@ -6,8 +6,8 @@ title: Categories
 <div id="archives">
     {% assign sorted_categories = site.categories | sort %}
     {% for category in sorted_categories %}
-    <div>
-        <h3 class="post-list-heading">{{ category | first | capitalize }}</h3>
+    <div id="{{ category.first }}">
+        <h3 class="post-list-heading">{{ category.first | capitalize }}</h3>
         <ul>
             {% for post in category.last %}
             <li>
