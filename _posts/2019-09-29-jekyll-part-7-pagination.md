@@ -193,3 +193,5 @@ In order to center the pagination links horizontally add the css below to */asse
 ```
 
 And we're done. Enjoy.
+
+The next part of the series, [Jekyll, part 8: Displaying categories on posts]({% post_url 2019-09-29-jekyll-part-8-displaying-categories-on-posts %}), will focus on displaying categories on posts.

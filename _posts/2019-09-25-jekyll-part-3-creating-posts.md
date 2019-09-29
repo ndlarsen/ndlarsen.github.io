@@ -20,7 +20,7 @@ date: 2019-09-25 20:29:15 +0200
 categories: [jekyll]
 ---
 ```
-The categories attribute could as well have been category or tags. As far as Jekyll is concerned, it'll be handled the same way except taht tags cannot be part of the url. Ommitting the square brackets is allod if there's only one category present. If there are several, seperate them by commas. Both a catogoris and a tags attribute can be present simultaneously.
+The categories attribute might as well have been category or tags. As far as Jekyll is concerned, it'll be handled the same way except taht tags cannot be part of the url. Ommitting the square brackets is allod if there's only one category present. If there are several, seperate them by commas. Both a catogoris and a tags attribute can be present simultaneously.
 
 ## Contents
 ---
