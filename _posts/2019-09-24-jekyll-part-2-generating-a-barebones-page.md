@@ -45,4 +45,4 @@ Go check it out.
 ---
 Now, the open *_config.yml* and change the title to something else than *Your awesome title*, because, honestly, that sucks. Change or comment out (place a \# at the beginning of the line) what else you see fit. Refresh the page in your browser and there you have it.
 
-Check out the next part here: [Jekyll, part 3: Creating posts]({% post_url 2019-09-25-jekyll-part-3-creating-posts %})
+The next part of the series, [Jekyll, part 3: Creating posts]({% post_url 2019-09-25-jekyll-part-3-creating-posts %}), will focus on creating the first post.

@@ -81,44 +81,44 @@ layout: default
 {% endraw %}
 ```
 
-Below are the current approach of the template above followd by the new approch it should implement.
-
 ### Current approach
 ---
-* if page has title
-    * set page title
-* if site posts are non-empty
-    * for each post in site posts
-        * assign date
-        * display date
-        * display link to post
-        * if showing excerpt is enabled
-            * show excerpt
-* display rss feed
+Below are the current approach the template above implemented.
+>* if page has title
+>    * set page title
+>* if site posts are non-empty
+>    * for each post in site posts
+>        * assign date
+>        * display date
+>        * display link to post
+>        * if showing excerpt is enabled
+>            * show excerpt
+>* display rss feed
 
 ### New approach
 ---
-* if page has title
-    * set page title
-* if pagination is enabled
-    * assign posts from paginator to posts
-* else
-    * assign posts from site to posts
-* if posts are non-empty
-    * for each post in posts
-        * assign date
-        * display date
-        * display link to post
-        * if showing excerpt is enabled
-            * show excerpt
-        * display rss feed
-* if pagination is enabled
-    * if pagination has previous page
-        * display link to previous page
-    * display current page number of total page number
-    * if pagination has next page
-        * display link to next page
-* display rss feed
+Below are the new approach the template should implement.
+>* if page has title
+>    * set page title
+>* if pagination is enabled
+>    * assign posts from paginator to posts
+>* else
+>    * assign posts from site to posts
+>* if posts are non-empty
+>    * for each post in posts
+>        * assign date
+>        * display date
+>        * display link to post
+>        * if showing excerpt is enabled
+>            * show excerpt
+>         * display rss feed
+>* if pagination is enabled
+>   * if pagination has previous page
+>     * display link to previous page
+>     * display current page number of total page number
+>     * if pagination has next page
+>       * display link to next page
+> * display rss feed
 
 ### The new template
 ---
