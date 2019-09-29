@@ -78,4 +78,4 @@ This is the contents of *categories.html* and it might look a bit wierd because 
 
 Upload and enjoy.
 
-The next part of the series, [Jekyll, part 6: Adding search functionality]({% post_url 2019-09-28-jekyll-part-6-adding-search-functionality %}), will focus on creating a search page using [Liquid[(), [JavaScript](https://en.wikipedia.org/wiki/JavaScript) and [Lunr](https://lunrjs.com).
+The next part of the series, [Jekyll, part 6: Adding search functionality]({% post_url 2019-09-28-jekyll-part-6-adding-search-functionality %}), will focus on creating a search page using [Liquid](https://jekyllrb.com/docs/liquid/), [JavaScript](https://en.wikipedia.org/wiki/JavaScript) and [Lunr](https://lunrjs.com/).

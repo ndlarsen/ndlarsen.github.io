@@ -25,6 +25,7 @@ Lunr needs the be fed all the data you want to be searchable in order to create 
 
 ### Overall approach
 ---
+When page loads:
 >* get all post for the site
 >* for each post in posts
 >   * add relevant post data to data list
@@ -109,7 +110,7 @@ title: Search
 ---
 In order for us to actually execute a search and display the results, we need to add some helper functions to hold it all together. Place the script below in */assets/search-helper.js*
 
-### The overall approach
+### Overall approach
 ---
 When the page is done loading and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) is ready:
 
