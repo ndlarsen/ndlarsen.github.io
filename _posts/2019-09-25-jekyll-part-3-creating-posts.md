@@ -65,4 +65,4 @@ categories: [SomeCategory,OptionalCategory]
 
 Use the script if you wish. It's available [here](https://github.com/ndlarsen/ndlarsen.github.io/blob/master/_scripts/genDraft.sh)
 
-The next part of the series, [Jekyll, part 4: Hosting at Github Pages]({% post_url 2019-09-26-jekyll-part-4-hosting-at-github-pages %}), will focus on using [Github Pages](https://pages.github.com/) as the hosting platform for your jekyll site
+The next part of the series, [Jekyll, part 4: Hosting at Github Pages]({% post_url 2019-09-26-jekyll-part-4-hosting-at-github-pages %}), will focus on using [Github Pages](https://pages.github.com/) as the hosting platform for your jekyll site.
