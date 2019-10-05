@@ -13,7 +13,6 @@ This post will show you how to display the categories of a post on the post's pa
 ---
 There isn't much to doing this. We just need to generate the links on the post template.
 ### Overall approach
----
 >* for category in post categories
 >   * display link
 
@@ -33,9 +32,10 @@ Told you is was simple. This translates to this simple bit of Liquid code that s
     </div>
 {% endraw %}
 ```
-
-## Adding section ids
+## Update the categories page
 ---
+This bit is pretty simple as well.
+### Adding section ids
  We need to update the categories page template with ids for the section links, you know the one I mentioned I made in [this post]({% post_url 2019-09-26-jekyll-part-5-adding-a-categories-page %}). There is nothing to this part either, in the *categories.html* just make sure to add an category id to the div containing the specific category list, so change:
  
  ```liquid{% raw %}

@@ -24,7 +24,6 @@ wget -P assets/ https://unpkg.com/lunr@2.3.6/lunr.js
 Lunr needs the be fed all the data you want to be searchable in order to create the index. In our case the index will be based on a map-like structure of JavaScript objects representing our posts each consisting of an identifier and searchable fields. We need to generate the data list which we'll do when the site is build using Liquid templating and a bit of JavaScript. Populating the index will be done afterwards using JavaScript only.
 
 ### Overall approach
----
 When page loads:
 >* get all post for the site
 >* for each post in posts
@@ -111,7 +110,6 @@ title: Search
 In order for us to actually execute a search and display the results, we need to add some helper functions to hold it all together. Place the script below in */assets/search-helper.js*
 
 ### Overall approach
----
 When the page is done loading and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) is ready:
 
 >* get search terms from url

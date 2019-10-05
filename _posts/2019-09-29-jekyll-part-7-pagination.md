@@ -39,7 +39,6 @@ Finally, rename the *index.md* in the project root to *index.html*.
 We need to add the pagination functionality to the leyout template that generates the list of posts which is *_layouts/home.html*. This layout is in turn used from *index.html*. The original version of it can be seen below.
 
 ### The original template
----
 ```liquid
 {% raw %}
 ---
@@ -80,8 +79,7 @@ layout: default
 ```
 
 ### Current approach
----
-Below are the current approach the template above implemented.
+Below are the current approach the template above is implementing.
 >* if page has title
 >    * set page title
 >* if site posts are non-empty
@@ -94,8 +92,7 @@ Below are the current approach the template above implemented.
 >* display rss feed
 
 ### New approach
----
-Below are the new approach the template should implement.
+Below are the new approach the template will be implementing.
 >* if page has title
 >    * set page title
 >* if pagination is enabled
@@ -113,14 +110,13 @@ Below are the new approach the template should implement.
 >* if pagination is enabled
 >   * if pagination has previous page
 >     * display link to previous page
->     * display current page number of total page number
->     * if pagination has next page
->       * display link to next page
+>   * display current page number of total pages number
+>   * if pagination has next page
+>     * display link to next page
 > * display rss feed
 
 ### The new template
----
-Translating the pseudo code algorithm above, the template will now look like below.
+Translating the pseudo code above and adding a little candy, the template will now look like below.
 
 ```liquid
 {% raw %}
@@ -182,7 +178,6 @@ layout: default
 ```
 
 ### Styling
----
 In order to center the pagination links horizontally add the css below to */assets/main.css*.
 ```css
 .pagination {

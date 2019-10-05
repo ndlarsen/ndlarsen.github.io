@@ -38,7 +38,6 @@ categories: [jekyll, liquid]
 With the categories sorted we still need an categories overview page, so I've added a *categories.html* file the to project root folder. This file will serve as the category list and will eventually contain the template to generate it. The templating language used by Jekyll is [Liquid](https://jekyllrb.com/docs/liquid/) and though it works Liquid is **NOT** pretty in my opinion. Furthermore, I find that Jekyll itself and Jekyll's use of Liquid is poorly documented.
 
 ### Overall approach
----
 In order to do this we need a plan and this will serve as a basic one.
 
 >* get all categories for the site
@@ -49,11 +48,9 @@ In order to do this we need a plan and this will serve as a basic one.
 >       * display link to post
 
 ### Sitewide variables
----
 Jekyll exposes a number of [sitewide variables](https://jekyllrb.com/docs/variables/) that are useful in this context. Namely the `site.categories` which it a collection of objects each representing a category. Each of these objects has a collection of posts and an attribute containing the category name. The post object again has attributes representing the post's title, category, url and such.
 
 ### The template
----
 This is the contents of *categories.html* and it might look a bit wierd because it's a mix of HTML and Liquid. Create the file in the project root. Jekyll should detect this file automatically and add a link the index page. Now, a little explanation, `category.first` is the category name and `category.last` contains the category posts. I **REALLY** wish these attributes were better named. I have not been able to find these attributes documented offficially and this is just way too close to [tribal knowledge](https://en.wikipedia.org/wiki/Tribal_knowledge) and proves my earlier point about poor documentation.
 
 ```html
