@@ -49,7 +49,7 @@ jekyll serve -w --draft
 I made a simple shell script to generate a basic skeleton post. I initially placed the script inside the *_scripts* folder in order to not display it. By running it:
 
 ```
-./getDraft.sh "Post title" JekyllCategory OptionCategory
+./getDraft.sh "Post title" SomeCategory OptionalCategory
 ```
 
 will output a file in the current folder which honours the naming convention with a Front Matter similar to the following:
