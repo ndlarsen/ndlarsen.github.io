@@ -1,0 +1,18 @@
+@startuml
+node "Web App" {
+    
+}
+
+node "REST API" {
+    
+}
+
+"Web App" - "REST API"
+
+database Database {
+
+}
+
+"REST API" - "Database"
+
+@enduml

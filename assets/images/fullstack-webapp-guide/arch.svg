@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="66px" preserveAspectRatio="none" style="width:378px;height:66px;" version="1.1" viewBox="0 0 378 66" width="378px" zoomAndPan="magnify"><defs><filter height="300%" id="fkv1lxah2xcov" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--entity Web App--><polygon fill="#FFFFFF" filter="url(#fkv1lxah2xcov)" points="6,18,16,8,108,8,108,44.2969,98,54.2969,6,54.2969,6,18" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="98" x2="107" y1="18" y2="9"/><line style="stroke: #000000; stroke-width: 1.5;" x1="6" x2="98" y1="18" y2="18"/><line style="stroke: #000000; stroke-width: 1.5;" x1="98" x2="98" y1="18" y2="54.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="21" y="40.9951">Web App</text><!--entity REST API--><polygon fill="#FFFFFF" filter="url(#fkv1lxah2xcov)" points="143,18,153,8,245,8,245,44.2969,235,54.2969,143,54.2969,143,18" style="stroke: #000000; stroke-width: 1.5;"/><line style="stroke: #000000; stroke-width: 1.5;" x1="235" x2="244" y1="18" y2="9"/><line style="stroke: #000000; stroke-width: 1.5;" x1="143" x2="235" y1="18" y2="18"/><line style="stroke: #000000; stroke-width: 1.5;" x1="235" x2="235" y1="18" y2="54.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="158" y="40.9951">REST API</text><!--entity Database--><path d="M280,18.5 C280,8.5 323,8.5 323,8.5 C323,8.5 366,8.5 366,18.5 L366,43.7969 C366,53.7969 323,53.7969 323,53.7969 C323,53.7969 280,53.7969 280,43.7969 L280,18.5 " fill="#FFFFFF" filter="url(#fkv1lxah2xcov)" style="stroke: #000000; stroke-width: 1.5;"/><path d="M280,18.5 C280,28.5 323,28.5 323,28.5 C323,28.5 366,28.5 366,18.5 " fill="none" style="stroke: #000000; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="66" x="290" y="45.4951">Database</text><!--link Web App to REST API--><path d="M108.1074,31 C119.6269,31 131.1463,31 142.6658,31 " fill="none" id="Web App-REST API" style="stroke: #A80036; stroke-width: 1.0;"/><!--link REST API to Database--><path d="M245.1465,31 C256.7029,31 268.2592,31 279.8156,31 " fill="none" id="REST API-Database" style="stroke: #A80036; stroke-width: 1.0;"/><!--
+@startuml
+node "Web App" {
+    
+}
+
+node "REST API" {
+    
+}
+
+"Web App" - "REST API"
+
+database Database {
+
+}
+
+"REST API" - "Database"
+
+@enduml
+
+PlantUML version 1.2019.09(Mon Aug 26 18:19:51 CEST 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.4+11-post-Ubuntu-1ubuntu218.04.3
+Operating System: Linux
+OS Version: 4.15.0-65-generic
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
