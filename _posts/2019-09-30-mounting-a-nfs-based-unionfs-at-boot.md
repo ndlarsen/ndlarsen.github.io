@@ -88,7 +88,7 @@ Implementing a solution should be simple and easy by now, right? I figured I jus
 ### Edit, reboot, profi.... oh, fml
 Well, as I mentioned earlier, this is not particularly well documented and the error messages from the OverlayFS module are nondescriptive at best. Adding to that I made some incorrect assumptions and did not think of a few very simple things I already knew so I actually ended up struggling a bit with this. Eventually I managed to mount an overlay manually as
 ```
-mount -t overlay overlayfs -o lowerdir=/mnt/proddata,upperdir=/mnt/data/diff,workdir=/mnt/data/work /mnt/data/testdata
+$ mount -t overlay overlayfs -o lowerdir=/mnt/proddata,upperdir=/mnt/data/diff,workdir=/mnt/data/work /mnt/data/testdata
 ```
 and converted the command into an filesystem table entry.
 ```

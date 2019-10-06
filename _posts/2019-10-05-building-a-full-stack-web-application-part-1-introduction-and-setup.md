@@ -33,11 +33,11 @@ One could argue that in a setup as simple as this one might as well leave out th
 ### Docker
 If you havn't already, you need to install Docker. For me, running a Debian based distro it is as easy as
 ```
-sudo apt-get install docker.io
+$ sudo apt-get install docker.io
 ```
 After this you should consider adding your user the the docker group to avoid having to run all docker commands via `sudo`. From a terminal execute
 ```
-sudo usermod -aG docker ${USER}
+$ sudo usermod -aG docker ${USER}
 ```
 Verify this succeeded by running `groups` the output should contain *docker* as mine below
 ```
@@ -48,28 +48,28 @@ You might need to reboot in order for the group addition to take effect.
 ### Docker-compose
 If you havn't already, you need to install docker-compose. For me, running a Debian based distro it is as easy as
 ```
-sudo apt-get install docker-compose
+$ sudo apt-get install docker-compose
 ```
 If this version of docker-compose is causing you problems, install the one directly from Docker as outlines [here](https://docs.docker.com/compose/install/).
 
 ### sbt (scala build tool)
 In order to build and run Scala applications you need to install sbt. Unless you're installing it via an IDE such as Jetbrains' [IntelliJ IDEA](https://www.jetbrains.com/idea/) you need to add their official package repositories and install it from there.
 ```
-echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
-sudo apt-get update
-sudo apt-get install sbt
+$ echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+$ curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
+$ sudo apt-get update
+$ sudo apt-get install sbt
 ```
 Shamelessly copied from the [offcial](https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html) documentation. Refer to it if you're not runnning a Debian based distribution.
 
 ### Angular
 Angular 8 requires nodejs v. 10.9.0 or later. I had to install it as snap in order to get a version recent enough. I chose the v. 10 series as it is an LTS.
 ```
-sudo snap install node --classic --channel=10
+$ sudo snap install node --classic --channel=10
 ```
 Install the angular cli
 ```
-npm install -g @angular/cli
+$ npm install -g @angular/cli
 ```
 If you're getting permission related errors refer to [this](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally) for a solution.
 
