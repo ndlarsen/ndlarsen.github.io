@@ -13,6 +13,8 @@ Never having been exposed to [Angular](https://en.wikipedia.org/wiki/Angular_(we
 * Part 3, REST API with Play and Scala
 * Part 4, Web application with Angular
 
+The codebase from the series is available [here](https://github.com/ndlarsen/fullstack-webapp-guide)
+
 ## An overview
 ---
 This will be a fairly simple setup as there is just the three components and will overall look like the image below.
