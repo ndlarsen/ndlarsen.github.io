@@ -7,7 +7,7 @@ categories: [mongodb,docker]
 
 ## Preface
 ---
-In this part I'll create a MongoDB 4.2.0 container via docker-compose for the storage layer and import some previously generated data.
+In this part I'll create a MongoDB 4.2.0 container via docker-compose for the storage layer and import some previously generated data. I'm assuming you already intalled Docker and Docker Compose as instructed in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %})
 
 ## Building the container image
 ---

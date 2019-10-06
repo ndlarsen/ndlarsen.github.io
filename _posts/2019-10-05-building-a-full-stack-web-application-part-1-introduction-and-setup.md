@@ -53,7 +53,7 @@ $ sudo apt-get install docker-compose
 If this version of docker-compose is causing you problems, install the one directly from Docker as outlines [here](https://docs.docker.com/compose/install/).
 
 ### sbt (scala build tool)
-In order to build and run Scala applications you need to install sbt. Unless you're installing it via an IDE such as Jetbrains' [IntelliJ IDEA](https://www.jetbrains.com/idea/) you need to add their official package repositories and install it from there.
+In order to build and run Scala applications you need to install sbt. Java is a requirement as well. Unless you're installing it via an IDE such as Jetbrains' [IntelliJ IDEA](https://www.jetbrains.com/idea/) you need to add their official package repositories and install it from there.
 ```
 $ echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
 $ curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
