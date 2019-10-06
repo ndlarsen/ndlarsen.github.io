@@ -1,0 +1,90 @@
+@startuml
+
+class User {
+    gender
+    email
+    phone
+    cell
+    net
+}
+
+User -- Id
+
+class Picture {
+    medium
+    large
+    thumbnail
+}
+
+class Name {
+    title
+    first
+    last
+}
+
+User -- Name
+
+class Location {
+    city
+    state
+    postcode
+    country
+}
+
+User -- Location
+
+class Street {
+    name
+    number
+}
+
+Location -- Street
+
+class Coordinates {
+    latitude
+    lonitude
+}
+
+Location -- Coordinates
+
+class Timezome {
+    offset
+    description
+}
+
+Location -- Timezome
+
+class DoB {
+    age
+    date
+}
+
+User -- DoB
+
+class Registered {
+    age
+    date
+}
+
+User -- Registered
+
+class Id {
+    name
+    value
+}
+
+User --  Picture
+
+class Login {
+    uuid
+    username
+    password
+    salt
+    md5
+    sha1
+    sha256
+}
+
+User -- Login
+
+@enduml

@@ -43,7 +43,7 @@ ndlarsen adm dialout cdrom sudo dip plugdev lpadmin sambashare kvm docker adbuse
 ```
 You might need to reboot in order for the group addition to take effect.
 
-## Docker-compose
+### Docker-compose
 If you havn't already, you need to install docker-compose. For me, running a Debian based distro it is as easy as
 ```
 sudo apt-get install docker-compose
@@ -71,9 +71,6 @@ npm install -g @angular/cli
 ```
 If you're getting permission related errors refer to [this](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally) for a solution.
 
-### Creating data
-Randomuser provides a REST API we can use to generate structural indentical but random data. The endpoint `https://randomuser.me/api/?results=10` generates 10. I've already done that and if you want to use the same dataset as I am it is available [here](https://github.com/ndlarsen/fullstack-webapp-guide/blob/master/mongodb/users.json).
-
 ### Project structure
 I created a project structure as outlined below.
 ```
@@ -82,5 +79,13 @@ full-stack-guide/
     ├── play-api/
     └── angular-app/
 ```
+
+### Getting data
+Randomuser provides a REST API we can use to generate structural indentical but random data. The endpoint `https://randomuser.me/api/?results=10` generates 10. I've already done that and if you want to use the same dataset as I am it is available [here](https://github.com/ndlarsen/fullstack-webapp-guide/blob/master/mongodb/users.json).
+
+### Data structure
+Looking at the blob of JSON our data seems to be structured as below
+![data structure](/assets/images/fullstack-webapp-guide/data_structure_diagram.svg)
+While we probably won't be using all of it later it's a suitable base.
 
 The next part of the series [Building a full stack web application, part 2: Storage with MongoDB]({% post_url 2019-10-05-building-a-full-stack-web-application-part-2-storage-with-mongodb %}) will focus on setting up the storage layer via MongoDB and Docker.
