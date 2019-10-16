@@ -1,14 +1,16 @@
 @startuml
 
 class User {
-    gender
-    email
-    phone
-    cell
-    nat
+    gender: String
+    name: Name
+    location: Location
+    email: String
+    login: Login
+    phone: String
+    picture: Picture
+    nat: String
 }
 
-User -- Id
 
 class Picture {
     medium
@@ -53,25 +55,6 @@ class Timezome {
 }
 
 Location -- Timezome
-
-class DoB {
-    age
-    date
-}
-
-User -- DoB
-
-class Registered {
-    age
-    date
-}
-
-User -- Registered
-
-class Id {
-    name
-    value
-}
 
 User --  Picture
 
