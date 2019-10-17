@@ -1,16 +1,15 @@
 @startuml
 
 class User {
-    gender: String
-    name: Name
-    location: Location
-    email: String
-    login: Login
-    phone: String
-    picture: Picture
-    nat: String
+    gender
+    name
+    location
+    email
+    login
+    phone
+    picture
+    nat
 }
-
 
 class Picture {
     medium
@@ -27,10 +26,13 @@ class Name {
 User -- Name
 
 class Location {
+    street
     city
     state
     postcode
     country
+    coordinates
+    timezone
 }
 
 User -- Location

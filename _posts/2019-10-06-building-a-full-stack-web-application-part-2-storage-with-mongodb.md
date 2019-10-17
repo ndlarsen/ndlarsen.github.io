@@ -69,7 +69,7 @@ $ docker exec -it fullstack_mongodb /bin/bash -c 'mongoimport --db fullstack --c
 The command should output something similar to
 ```
 2019-10-05T21:37:53.561+0000	connected to: mongodb://localhost/
-2019-10-05T21:37:53.602+0000	100 document(s) imported successfully. 0 document(s) failed to import.
+2019-10-05T21:37:53.602+0000	10 document(s) imported successfully. 0 document(s) failed to import.
 ```
 At this point you can connect to the container and enter the mongo shell
 ```
@@ -86,61 +86,48 @@ Get the first document
 ```JSON
 > db.users.findOne()
 {
-	"_id" : ObjectId("5d998e44fb4cdf93870c74e6"),
+	"_id" : ObjectId("5da762775e0a1e630dae1ef7"),
 	"gender" : "female",
 	"name" : {
-		"title" : "Miss",
-		"first" : "Gülay",
-		"last" : "Junge"
+		"title" : "Mrs",
+		"first" : "Marlene",
+		"last" : "Johnson"
 	},
 	"location" : {
 		"street" : {
-			"number" : 8604,
-			"name" : "Marktplatz"
+			"number" : 976,
+			"name" : "College St"
 		},
-		"city" : "Homburg",
-		"state" : "Brandenburg",
-		"country" : "Germany",
-		"postcode" : 26354,
+		"city" : "Tallahassee",
+		"state" : "Louisiana",
+		"country" : "United States",
+		"postcode" : 37033,
 		"coordinates" : {
-			"latitude" : "60.0048",
-			"longitude" : "-80.8267"
+			"latitude" : "34.0882",
+			"longitude" : "65.3055"
 		},
 		"timezone" : {
-			"offset" : "-3:00",
-			"description" : "Brazil, Buenos Aires, Georgetown"
+			"offset" : "-11:00",
+			"description" : "Midway Island, Samoa"
 		}
 	},
-	"email" : "Gulay.Junge@example.com",
+	"email" : "marlene.johnson@example.com",
 	"login" : {
-		"uuid" : "ba4e68ed-fd10-4964-8ec5-a07fa68d642d",
-		"username" : "goldenpeacock720",
-		"password" : "dynamo",
-		"salt" : "FeFsoLkU",
-		"md5" : "f165e970fa27157b5a5bc89fff3d2ed1",
-		"sha1" : "b244d8ebc5a003a9237422e79ceb2d43624f58a8",
-		"sha256" : "3daaf79282f369eac3ff68bd07a1ac4962b2872723a2f5eb85d09ddee4d8d521"
+		"uuid" : "7ef0f7d0-9c43-43ca-b297-550ee7355e35",
+		"username" : "bigbutterfly337",
+		"password" : "playtime",
+		"salt" : "54WUif1k",
+		"md5" : "ed442b9bc71456008f65afc41f6398d6",
+		"sha1" : "60a2b817da41a350be1b90fe811f774ae7ae73b0",
+		"sha256" : "be206e19deb1118f0d952207b9300b3fa4184abc20af84d13c3731fa0191b00b"
 	},
-	"dob" : {
-		"date" : "1948-01-29T07:45:02.704Z",
-		"age" : 71
-	},
-	"registered" : {
-		"date" : "2009-04-29T13:36:11.872Z",
-		"age" : 10
-	},
-	"phone" : "0370-1948139",
-	"cell" : "0178-7897762",
-	"id" : {
-		"name" : "",
-		"value" : null
-	},
+	"phone" : "(738)-938-4162",
 	"picture" : {
-		"large" : "https://randomuser.me/api/portraits/women/66.jpg",
-		"medium" : "https://randomuser.me/api/portraits/med/women/66.jpg",
-		"thumbnail" : "https://randomuser.me/api/portraits/thumb/women/66.jpg"
+		"large" : "https://randomuser.me/api/portraits/women/44.jpg",
+		"medium" : "https://randomuser.me/api/portraits/med/women/44.jpg",
+		"thumbnail" : "https://randomuser.me/api/portraits/thumb/women/44.jpg"
 	},
-	"nat" : "DE"
+	"nat" : "US"
 }
 ```
 Or getting the amount of female users
