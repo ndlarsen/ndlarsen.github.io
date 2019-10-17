@@ -83,7 +83,7 @@ full-stack-guide/
 ```
 
 ### Getting data
-Randomuser provides a REST API we can use to generate structural indentical but random data. The endpoint `https://randomuser.me/api/?results=10` generates 10. I've already done that and if you want to use the same dataset as I am it is available [here](https://github.com/ndlarsen/fullstack-webapp-guide/blob/master/mongodb/users.json).
+I've generated som data at [mockaroo](https://mockaroo.com/) and if you want to use the same dataset as I am it is available [here](https://github.com/ndlarsen/fullstack-webapp-guide/blob/master/mongodb/users.json).
 
 ### Data structure
 Looking at the blob of JSON our data seems to be structured as below

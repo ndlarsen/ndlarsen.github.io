@@ -86,48 +86,28 @@ Get the first document
 ```JSON
 > db.users.findOne()
 {
-	"_id" : ObjectId("5da762775e0a1e630dae1ef7"),
-	"gender" : "female",
+	"_id" : ObjectId("5da8db25de465bc270c09d91"),
+	"gender" : "Male",
 	"name" : {
-		"title" : "Mrs",
-		"first" : "Marlene",
-		"last" : "Johnson"
+		"title" : "Honorable",
+		"first" : "Wylie",
+		"last" : "McCowen"
 	},
 	"location" : {
 		"street" : {
-			"number" : 976,
-			"name" : "College St"
+			"number" : "88030",
+			"name" : "Jenna"
 		},
-		"city" : "Tallahassee",
-		"state" : "Louisiana",
-		"country" : "United States",
-		"postcode" : 37033,
-		"coordinates" : {
-			"latitude" : "34.0882",
-			"longitude" : "65.3055"
-		},
-		"timezone" : {
-			"offset" : "-11:00",
-			"description" : "Midway Island, Samoa"
-		}
+		"city" : "Topeka",
+		"state" : "KS",
+		"postcode" : "66699"
 	},
-	"email" : "marlene.johnson@example.com",
 	"login" : {
-		"uuid" : "7ef0f7d0-9c43-43ca-b297-550ee7355e35",
-		"username" : "bigbutterfly337",
-		"password" : "playtime",
-		"salt" : "54WUif1k",
-		"md5" : "ed442b9bc71456008f65afc41f6398d6",
-		"sha1" : "60a2b817da41a350be1b90fe811f774ae7ae73b0",
-		"sha256" : "be206e19deb1118f0d952207b9300b3fa4184abc20af84d13c3731fa0191b00b"
+		"username" : "wmccowen0",
+		"password" : "rAwDb7L1njT8"
 	},
-	"phone" : "(738)-938-4162",
-	"picture" : {
-		"large" : "https://randomuser.me/api/portraits/women/44.jpg",
-		"medium" : "https://randomuser.me/api/portraits/med/women/44.jpg",
-		"thumbnail" : "https://randomuser.me/api/portraits/thumb/women/44.jpg"
-	},
-	"nat" : "US"
+	"phone" : "785-280-2046",
+	"avatar" : "https://robohash.org/accusamusquibusdamqui.png?size=100x100&set=set1"
 }
 ```
 Or getting the amount of female users
