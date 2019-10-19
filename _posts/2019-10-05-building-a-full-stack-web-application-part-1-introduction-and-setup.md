@@ -83,7 +83,7 @@ full-stack-guide/
 ```
 
 ### Getting data
-I've generated som data at [mockaroo](https://mockaroo.com/) and if you want to use the same dataset as I am it is available [here](https://github.com/ndlarsen/fullstack-webapp-guide/blob/master/mongodb/users.json).
+I generated some data at [randomuser](https://randomuser.me/) and if you want to use the same dataset as I am it is available [here](https://github.com/ndlarsen/fullstack-webapp-guide/blob/master/mongodb-seed/users.json).
 
 ### Data structure
 Looking at the blob of JSON our data seems to be structured as below

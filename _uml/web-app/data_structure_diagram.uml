@@ -1,13 +1,14 @@
 @startuml
 
 class User {
-    gender
-    name
-    location
-    email
-    login
-    phone
-    avatar
+    gender: String
+    name: Name
+    location: Location
+    email: String
+    login: Login
+    phone: String
+    picture: Picture
+    nat: String
 }
 
 class Name {
@@ -19,7 +20,6 @@ class Name {
 User -- Name
 
 class Location {
-    street
     city
     state
     postcode
@@ -28,6 +28,14 @@ class Location {
 
 User -- Location
 
+class Picture {
+    medium
+    large
+    thumbnail
+}
+
+User --  Picture
+
 class Street {
     name
     number
@@ -35,12 +43,18 @@ class Street {
 
 Location -- Street
 
-class Login {
-    username
-    password
+class Coordinates {
+    latitude
+    lonitude
 }
 
-User -- Login
+Location -- Coordinates
+
+class Timezome {
+    offset
+    description
+}
+
+Location -- Timezome
 
 @enduml
-
