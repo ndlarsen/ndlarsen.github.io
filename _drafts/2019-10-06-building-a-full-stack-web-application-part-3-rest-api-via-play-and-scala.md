@@ -7,7 +7,7 @@ categories: [docker,play,scala]
 
 ## Preface
 ---
-This part will focus on setting up a simple REST API with Play and Scala. Play is a MVC framework written in Scala and is capable of serving server side rendered web pages. However, as the UI will be written in Angular later, I will not use this functionality but rather use it for an intermediary layer between the Angular UI and MongoDB. I'm assuming you already installed java and sbt as instructed in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %})
+This part will focus on setting up a simple REST API with Play and Scala. Play is a MVC framework written in Scala and is capable of serving server side rendered web pages. However, as the UI will be written in Angular later, I will not use this functionality but rather use it for an intermediary layer between the Angular UI and MongoDB. I'm assuming you already installed java and sbt as instructed in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %}). I'm initially expecting to add CRUD User functionality to the API. This will be implemented as PUT, GET and DELETE endpoints and needed support functionality.
 
 ## Setting up the project
 ---
@@ -97,8 +97,7 @@ Date: Mon, 14 Oct 2019 16:40:04 GMT
 Content-Length: 0
 ```
 
-## Adding the MongoDB module
----
+### Adding the MongoDB module
 For communication with the database we'll be using a Play module called [ReactiveMongo](http://reactivemongo.org). Using this we won't have to deal with e.g. establishing connection to the database and other things like that. In `build.sbt` change line 10-11 from
 
 ```scala
@@ -122,12 +121,11 @@ mongodb.uri = "mongodb://localhost:27017/fullstack"
 ```
 The first line will tell Play the actually enable the module and the last is defining the url of the database instance in our Docker container from [part 2]({% post_url 2019-10-06-building-a-full-stack-web-application-part-2-storage-with-mongodb %})
 
-## Data conversion
----
-As an example we'll write functionality to find users by supplying an email address. In order to provide the result from the database we're going to deserialize the JSON we recieve from the database into objects and serialize the objects back into JSON again before providing it the the API client. Yes, in this case it's a bit contrived and unneeded as we're not processing the data within the API but for the purpose of making a simple example it's fine. For this `JSON -> object -> JSON` process to work, we need to model the data as classes and ensure we have some formatters to handle the conversion.
+### Data conversion
+In order to get data from and put data into the database we're going to deserialize the JSON we recieve from the database into objects and serialize the objects back into JSON again before providing it the the API client. Yes, in this case it's a bit contrived and unneeded as we're not processing the data within the API but for the purpose of making a simple example it's fine. For this `JSON -> object -> JSON` process to work, we need to model the data as classes and ensure we have some formatters to handle the conversion.
 
-### The models
-The overall data structure and relations are outlined in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %}#data-structure). Rather that modeling the entire structure, we'll keep it to user, name, part of the location, street, login and picture. I placed all models inside `app/models/UserModels.scala` abd hey look like this:
+#### The models
+The overall data structure and relations are outlined in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %}#data-structure). Rather that model the entire structure, we'll keep it to user, name, part of the location, street, and picture. I placed all models inside `app/models/UserModels.scala` abd they look like this:
 
 ```scala
 package models
@@ -138,12 +136,12 @@ case class Name(first: String, last: String, title: String)
 case class Street(number: Int, name: String)
 case class Location(street: Street, city: String, state: String, postcode: Int, country: String)
 case class Picture(medium: String, large: String, thumbnail: String)
-case class User(gender: String, name: Name, location: Location, email: String, login: Login, phone: String, picture: Picture, nat: String)
+case class User(gender: String, name: Name, location: Location, email: String, phone: String, picture: Picture, nat: String)
 ```
 
-There's really not a whole lot to say about them besides the fact that they're [case classes](https://www.geeksforgeeks.org/scala-case-class-and-case-object/). If you're not familiar with case classes they'll probably look odd to you but think of them as classes on steroids comming with a lot of very nice functionality by default. Other that for practise, I cannot recall having written a regular class in scala.
+There's really not a whole lot to say about them besides the fact that they're [case classes](https://www.geeksforgeeks.org/scala-case-class-and-case-object/). If you're not familiar with case classes they'll probably look odd to you but think of them as classes on steroids comming with a lot of very nice functionality by default. The case class by default provides getters, methods for toString hashCode and structural equality, a companion object with an apply method that removes the need for the new keyword and fuctionality to pattern match and then some. Other than for practise, I cannot recall having written a regular class in scala.
 
-### The JSON formatters
+#### The JSON formatters
 Both Play and ReactiveMongo comes with functionality built in to (de)serialize JSON. For this we'll be using functionality from ReactiveMongo as I do not see any reason to write any from scratch. For this to work there is a caveat, though. The class attributes needs to be named *exactly* the same as the attributes from the JSON you want to extract. Our formatters will look like below and are placed in `app/models/JsonFormats.scala` 
 ```scala
 package models
@@ -159,15 +157,6 @@ object JsonFormats {
 }
 
 ```
-
-## The first functionality
----
-For our first bit of functionality we need to add an endpoint we can query. This will be composed of an route in `conf/routes` and a method in `app/controllers/UserController.scala` which the route will call. As the controller method need to do several things, let's break it a bit more down. First getting or establishing a connection to the database, then getting a handle to the right collection, then create an object respresenting the query we are doing, then executing the query in the database which returns a cursor and finally converting the content of the cursor, if any, into a result to return. So, overall:
-* get connection to db
-* get a handle to the collection
-* create query object
-* execute query
-* convert return value
 
 ### Extending the controller
 As mentioned earlier we'll be leveraging functionality from ReactiveMongo to handle database connection and such. This means we need to extend our `UserController` with `MongoController` and `ReactiveMongoComponents` as well as passing an instance of `ReactiveMongoApi` as an argument to it. In `app/controllers/UserController.scala` replace
@@ -189,6 +178,16 @@ The `MongoController` we're extending our controller with, supplies an attribute
 ```
 private val collection = database.map(_.collection[JSONCollection]("users"))
 ```
+
+## GET /user/email/:param
+---
+For our first bit of functionality we need to add an endpoint we can query. This will be composed of an route in `conf/routes` and a method in `app/controllers/UserController.scala` which the route will call. As the controller method need to do several things, let's break it a bit more down. First getting or establishing a connection to the database, then getting a handle to the right collection, then create an object respresenting the query we are doing, then executing the query in the database which returns a cursor and finally converting the content of the cursor, if any, into a result to return. So, overall:
+* get connection to db (done above)
+* get a handle to the collection (done above)
+* create query object
+* execute query
+* convert return value
+
 ### Getting data
 As we now have a handle to our database collection we can do queries. For this we're using the method
 ```scala
@@ -213,31 +212,57 @@ At this point we need to get the collection handle, execute our query and get th
 Finally we need to convert the result into JSON and return it.
 ```scala
       val futureUsersList = cursor.flatMap(_.collect[Seq](-1, Cursor.FailOnError[Seq[User]]()))
-      futureUsersList.map { persons => Ok(Json.toJson(users)) }
+      futureUsersList.map {
+        case Nil => NotFound
+        case users: Seq[User] => Ok(Json.toJson(users))
+      }
 }
 ```
-Add this method to `app/controllers/UserController.scala`.
+Rearranging the code the result is
+```scala
+  def findByEmail(email: String): Action[AnyContent] = Action.async {
+    val selection = Json.obj("email" -> email)
+    getData(selection)
+  }
 
-#### The route
+  private def getData(selection: JsObject): Future[Result] = {
+    val cursor = doQuery(selection)
+    cursorToUserSeq(cursor).map {
+      case Nil => NotFound
+      case users: Seq[User] => Ok(Json.toJson(users))
+    }
+  }
+
+  private def doQuery(selection: JsObject) = collection.map {
+    val projection = Option.empty[JsObject]
+    _.find(selection, projection).cursor[User]()
+  }
+
+  private def cursorToUserSeq(cursor: Future[Cursor[User]]): Future[Seq[User]] = {
+    cursor.flatMap(_.collect[Seq](-1, Cursor.FailOnError[Seq[User]]()))
+  }
+```
+Add these methods to `app/controllers/UserController.scala`.
+
+### The route
 The last bit we need is the define an actual endpoint to query. In `conf/routes` replace
 ```conf
 GET     /                          controllers.UserController.index
 ```
 with
+```conf
+GET     /user/:email         controllers.UserController.findByEmail(email)
 ```
-GET     /user/email/:email         controllers.UserController.findByEmail(email)
-```
-This enables an endpoint `/user/email/:email` accepting GET requests with a parameter. This route will call the method `findByEmail(email: String)` in the controller `UserController` with the given argument.
+This enables an endpoint `/user/:email` accepting GET requests with a parameter. This route will call the method `findByEmail(email: String)` in the controller `UserController` with the given argument.
 
-#### Calling it
+### Test it
 ```
-$ curl localhost:9000/users/email/hunter.schmidt@example.com
+$ curl localhost:9000/user/email/nina.sutton@example.com
 
-[{"gender":"male","name":{"first":"Hunter","last":"Schmidt","title":"Mr"},"location":{"street":{"number":9782,"name":"Taylor St"},"city":"Westminster","state":"Wisconsin","postcode":96090,"country":"United States"},"email":"hunter.schmidt@example.com","login":{"username":"browncat398","password":"home","salt":"Enp1s0Az","md5":"80716a5f6a1cb7829aafc39ffa618b78","sha1":"727d37e93af9435ec245b6b4c7a4c1f8cf0cb19e","sha256":"5a4e43592be06852f45082e7e9760d991be7e3cbd2195edc9139c6498d243a98"},"phone":"(814)-690-7782","picture":{"medium":"https://randomuser.me/api/portraits/med/men/90.jpg","large":"https://randomuser.me/api/portraits/men/90.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/men/90.jpg"},"nat":"US"}]
+[{"gender":"female","name":{"first":"Nina","last":"Sutton","title":"Miss"},"location":{"street":{"number":5603,"name":"Harrison Ct"},"city":"Lancaster","state":"Utah","postcode":63734,"country":"United States"},"email":"nina.sutton@example.com","phone":"(086)-093-1748","picture":{"medium":"https://randomuser.me/api/portraits/med/women/12.jpg","large":"https://randomuser.me/api/portraits/women/12.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/women/12.jpg"},"nat":"US"}]
 ```
-
 By the way, you can remove
-```
+```scala
   /**
    * Create an Action to render an HTML page.
    *
@@ -249,15 +274,164 @@ By the way, you can remove
     Ok(views.html.index())
   }
 ```
-from `app/controllers/UserController.scala` if you havn't already.
+from `app/controllers/UserController.scala` if you haven't already.
 
-### Putting data
+## PUT /user/
+---
+The PUT endpoint will provide functionality to both create a new user as well as update en existing user. For this to work we need to parse the request body, validate that the body content conforms the our model structure and finally insert it into the database.
+* parse body
+* validate body content
+* create selection object
+* insert into database
 
-### Deleting data
+For convenience I've divided the method into a public and a private helper. `insertUser()` and `doInsert(user: User)`
 
-### Updating data
+### insertUser()
+The main responsibility of this method is to the validate the content of the request body and act accordingly.
+```scala
+  def insertUser(): Action[JsValue] = Action.async(parse.json) { request =>
+    request.body.validate[User] match {
+      case error: JsError => Future.successful(BadRequest("Invalid input format"))
+      case success: JsSuccess[User] => doInsert(success.value).flatten
+    }
+  }
+```
 
-These are the basics. I extended the controller with a few methods and rearranged some code within it. The final result is [here](https://github.com/ndlarsen/fullstack-webapp-guide/tree/master/play-api)
+### doInsert(user: User)
+The helper methos will build our selctor and modifier for the update. The update is also passed `upsert = true` to ensure the document is created if no existing match is found.
+```scala
+  private def doInsert(user: User) = collection.map {
+    val selector = Json.obj("email" -> user.email)
+    val modifier = Json.obj(
+      "$set" -> Json.toJson(user)
+    )
+    _.update(ordered = false).one(selector, modifier, upsert = true, multi = false).map { writeResult =>
+      if (writeResult.ok) {
+        Created
+      } else {
+        InternalServerError(writeResult.toString)
+      }
+    }
+  }
+```
+### The route
+And the route as the final piece.
+```
+PUT     /user/                    controllers.UserController.insertUser()
+```
+
+### Test it
+With valid data
+```
+$ curl -i -X PUT http://localhost:9000/user/ -H 'Content-Type: application/json' -d '{"gender":"female","name":{"title":"Miss","first":"Gladys","last":"Andrews"},"location":{"street":{"number":6151,"name":"Spring Hill Rd"},"city":"Princeton","state":"Florida","country":"United States","postcode":83886},"email":"gladys.andrews@example.com","phone":"(689)-603-9010","picture":{"large":"https://randomuser.me/api/portraits/women/35.jpg","medium":"https://randomuser.me/api/portraits/med/women/35.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/women/35.jpg"},"nat":"US"}'
+
+HTTP/1.1 201 Created
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 22:39:56 GMT
+Content-Length: 0
+```
+and with invalid data
+```
+curl -i -X PUT http://localhost:9Type: application/json' -d '{}'
+HTTP/1.1 400 Bad Request
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 22:42:39 GMT
+Content-Type: text/plain; charset=UTF-8
+Content-Length: 20
+
+Invalid input format
+```
+
+## DELETE /user/email/:email
+---
+
+```
+  def deleteUser(email: String): Action[AnyContent] = Action.async {
+    collection.map{
+      val selector = Json.obj({"email" -> email})
+      _.delete(ordered = false).one(selector).map{ deleteResult =>
+        if (deleteResult.ok) {
+          Ok
+        } else {
+          InternalServerError(deleteResult.toString)
+        }
+      }
+    }.flatten
+  }
+```
+
+## Test it
+---
+```
+$ curl -i -X GET http://localhost:9000/user/email/gladys.andrews@example.com
+
+HTTP/1.1 404 Not Found
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 23:22:23 GMT
+Content-Length: 0
+
+$ curl -i -X PUT http://localhost:9000/user/ -H 'Content-Type: application/json' -d '{"gender":"female","name":{"title":"Miss","first":"Gladys","last":"Andrews"},"location":{"street":{"number":6151,"name":"Spring Hill Rd"},"city":"Princeton","state":"Florida","country":"United States","postcode":83886},"email":"gladys.andrews@example.com","phone":"(689)-603-9010","picture":{"large":"https://randomuser.me/api/portraits/women/35.jpg","medium":"https://randomuser.me/api/portraits/med/women/35.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/women/35.jpg"},"nat":"US"}'
+
+HTTP/1.1 201 Created
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 23:21:20 GMT
+Content-Length: 0
+
+$ curl -i -X GET http://localhost:9000/user/email/gladys.andrews@example.com
+
+HTTP/1.1 200 OK
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 23:21:42 GMT
+Content-Type: application/json
+Content-Length: 498
+
+[{"gender":"female","name":{"first":"Gladys","last":"Andrews","title":"Miss"},"location":{"street":{"number":6151,"name":"Spring Hill Rd"},"city":"Princeton","state":"Florida","postcode":83886,"country":"United States"},"email":"gladys.andrews@example.com","phone":"(689)-603-9010","picture":{"medium":"https://randomuser.me/api/portraits/med/women/35.jpg","large":"https://randomuser.me/api/portraits/wondlarsen@master:~/src/fullstack-webapp-guide$ 
+
+$ curl -i -X DELETE http://localhost:9000/user/email/gladys.andrews@example.com
+
+HTTP/1.1 200 OK
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 23:21:56 GMT
+Content-Length: 0
+
+$ curl -i -X GET http://localhost:9000/user/email/gladys.andrews@example.com
+
+HTTP/1.1 404 Not Found
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sat, 19 Oct 2019 23:22:23 GMT
+Content-Length: 0
+```
+
+This is the basic fuctionality. I extended the controller with a few methods and rearranged some code within it. The final result is [here](https://github.com/ndlarsen/fullstack-webapp-guide/tree/master/play-api)
 
 ## Dockerize it
 ---
+
