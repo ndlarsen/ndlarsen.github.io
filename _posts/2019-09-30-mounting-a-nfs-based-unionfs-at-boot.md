@@ -175,4 +175,12 @@ and to enable the unit right away
 systemctl start mnt-data-testdata.mount
 ```
 
+#### Resetting
+Should you for some reason need to reset the changes you can stop the device, deletes the diff files and start the device again:
+```
+systemctl stop mnt-data-testdata.mount
+rm -rfv /mnt/data/diff/*
+systemctl start mnt-data-testdata.mount
+```
+
 Enjoy.
