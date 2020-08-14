@@ -36,6 +36,10 @@ github_username: ndlarsen
 minima:
   date_format: "%b %-d, %Y"
 
+# disable RSS subscribe link
+rss_enabled: false
+        #enabled: false
+
 # Build settings
 theme: minima
 plugins:
