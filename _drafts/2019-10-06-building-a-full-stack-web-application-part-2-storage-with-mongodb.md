@@ -30,7 +30,7 @@ COPY mongo-init.js /docker-entrypoint-initdb.d/mongo-init.js
 This will use the mongo 4.2.0 image as base for the image we're building and copy the database initialization script into the container. Docker-compose cannot copy files which is why we're doing it here.
 
 ### docker-compose.yml
-Within the project's mongodb folder create a file named `docker-compose.yml`. One could argue that writing a compose file is not needed at this point but we're going use it for the seed container and use in the next part also so we might as well do it right away. The content of the file should be what is listed below. Keep in mind that Yaml is pretty particular about indenting and whitespace.
+Within the project's mongodb folder create a file named `docker-compose.yml`. One could argue that writing a compose file is not needed but it just makes things a little easier. We're going use it for the seed container and use in the next part also so we might as well write it right away. The content of the file should be what is listed below. Keep in mind that Yaml is pretty particular about indenting and whitespace.
 ```yml
 version: "3.5"
 
@@ -89,7 +89,7 @@ eval "$*"
 ```
 
 ### Dockerfile
-The Dockerfile just uses a basic container image, adds the tools it needs, copies the data and import script over and executes the import script. Save as `mongodb-seed/Dockerfile`
+The Dockerfile just uses a basic container image, adds the tools it needs, copies the data and import script over and executes the import script. I'm using alpine 3.9 as the mongodb-tools package isn't available in later versions at the time of writing. Save as `mongodb-seed/Dockerfile`
 
 ```docker
 FROM alpine:3.9

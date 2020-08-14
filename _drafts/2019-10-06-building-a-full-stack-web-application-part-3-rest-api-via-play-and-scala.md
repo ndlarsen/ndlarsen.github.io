@@ -7,7 +7,7 @@ categories: [docker,play,scala]
 
 ## Preface
 ---
-This part will focus on setting up a simple REST API with Play and Scala. Play is a MVC framework written in Scala and is capable of serving server side rendered web pages. However, as the UI will be written in Angular later, I will not use this functionality but rather use it for an intermediary layer between the Angular UI and MongoDB. I'm assuming you already installed java and sbt as instructed in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %}). I'm initially expecting to add CRUD User functionality to the API. This will be implemented as PUT, GET and DELETE endpoints and needed support functionality.
+This part will focus on setting up a simple REST API with Play and Scala. Play is a MVC framework written in Scala and is capable of serving server side rendered web pages. However, as the UI will be written in Angular later, I will not use this functionality but rather use it for an intermediary layer between the Angular UI and MongoDB. I'm assuming you already installed java and sbt as instructed in [part 1]({% post_url 2019-10-05-building-a-full-stack-web-application-part-1-introduction-and-setup %}). I'm initially expecting to add CRUD User functionality to the API. This will be implemented as PUT, GET and DELETE endpoints with needed support functionality.
 
 ## Setting up the project
 ---
@@ -97,7 +97,8 @@ Date: Mon, 14 Oct 2019 16:40:04 GMT
 Content-Length: 0
 ```
 
-### Adding the MongoDB module
+## Adding the MongoDB module
+---
 For communication with the database we'll be using a Play module called [ReactiveMongo](http://reactivemongo.org). Using this we won't have to deal with e.g. establishing connection to the database and other things like that. In `build.sbt` change line 10-11 from
 
 ```scala
@@ -121,7 +122,8 @@ mongodb.uri = "mongodb://localhost:27017/fullstack"
 ```
 The first line will tell Play the actually enable the module and the last is defining the url of the database instance in our Docker container from [part 2]({% post_url 2019-10-06-building-a-full-stack-web-application-part-2-storage-with-mongodb %})
 
-### Data conversion
+## Data conversion
+---
 In order to get data from and put data into the database we're going to deserialize the JSON we recieve from the database into objects and serialize the objects back into JSON again before providing it the the API client. Yes, in this case it's a bit contrived and unneeded as we're not processing the data within the API but for the purpose of making a simple example it's fine. For this `JSON -> object -> JSON` process to work, we need to model the data as classes and ensure we have some formatters to handle the conversion.
 
 #### The models
@@ -165,6 +167,8 @@ class UserController @Inject()(cc: ControllerComponents) extends AbstractControl
 ```
 with
 ```scala
+import play.modules.reactivemongo._
+
 class UserController @Inject()(cc: ControllerComponents,
                                val reactiveMongoApi: ReactiveMongoApi)
                               (implicit ec: ExecutionContext)
@@ -175,7 +179,11 @@ class UserController @Inject()(cc: ControllerComponents,
 
 ### Database connection
 The `MongoController` we're extending our controller with, supplies an attribute `database` which we can use to connect to our database and get a reference to the collection we want. In `app/controllers/UserController.scala` add
+```scala
+import reactivemongo.play.json.collection._
 ```
+and
+```scala
 private val collection = database.map(_.collection[JSONCollection]("users"))
 ```
 
@@ -193,7 +201,13 @@ As we now have a handle to our database collection we can do queries. For this w
 ```scala
 find[S, J](selector: S, projection: Option[J])
 ```
-This method takes a selector, our query, and an optional projection, defining the values from the result we want, as parameters. Both the selector and projection are in the form of a JSON object. In this case we want all users with a specific email address and all values from the result. This means our method should probably take the email as an argument.
+Import
+```scala
+import reactivemongo.api.Cursor
+import reactivemongo.play.json._
+```
+
+This method takes a selector, our query, and an optional projection, defining the values from the result we want, as parameters. Both the selector and projection are in the form of a JSON object. In this case we want all users with a specific email address and all values from the result. This means our method should probably take the email as an argument. 
 
 ```scala
 def findByEmail(email: String): Action[AnyContent] = Action.async {
@@ -244,7 +258,7 @@ Rearranging the code the result is
 ```
 Add these methods to `app/controllers/UserController.scala`.
 
-### The route
+### Routing
 The last bit we need is the define an actual endpoint to query. In `conf/routes` replace
 ```conf
 GET     /                          controllers.UserController.index
@@ -256,10 +270,33 @@ GET     /user/:email         controllers.UserController.findByEmail(email)
 This enables an endpoint `/user/:email` accepting GET requests with a parameter. This route will call the method `findByEmail(email: String)` in the controller `UserController` with the given argument.
 
 ### Test it
+Getting a existent user
 ```
-$ curl localhost:9000/user/email/nina.sutton@example.com
+$ $ curl -i localhost:9000/user/email/nina.sutton@example.com
+
+HTTP/1.1 200 OK
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sun, 20 Oct 2019 08:51:35 GMT
+Content-Type: application/json
+Content-Length: 486
 
 [{"gender":"female","name":{"first":"Nina","last":"Sutton","title":"Miss"},"location":{"street":{"number":5603,"name":"Harrison Ct"},"city":"Lancaster","state":"Utah","postcode":63734,"country":"United States"},"email":"nina.sutton@example.com","phone":"(086)-093-1748","picture":{"medium":"https://randomuser.me/api/portraits/med/women/12.jpg","large":"https://randomuser.me/api/portraits/women/12.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/women/12.jpg"},"nat":"US"}]
+```
+and getting a nonexistent user
+```
+$ curl -i localhost:9er/email/nonexistent@example.com
+HTTP/1.1 404 Not Found
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sun, 20 Oct 2019 08:53:25 GMT
+Content-Length: 0
 ```
 By the way, you can remove
 ```scala
@@ -284,10 +321,8 @@ The PUT endpoint will provide functionality to both create a new user as well as
 * create selection object
 * insert into database
 
-For convenience I've divided the method into a public and a private helper. `insertUser()` and `doInsert(user: User)`
-
-### insertUser()
-The main responsibility of this method is to the validate the content of the request body and act accordingly.
+### Putting data
+For convenience I've divided the functionality into a public method and a private helper. The main responsibility of the public method is to validate the content of the request body and act accordingly.
 ```scala
   def insertUser(): Action[JsValue] = Action.async(parse.json) { request =>
     request.body.validate[User] match {
@@ -297,8 +332,7 @@ The main responsibility of this method is to the validate the content of the req
   }
 ```
 
-### doInsert(user: User)
-The helper methos will build our selctor and modifier for the update. The update is also passed `upsert = true` to ensure the document is created if no existing match is found.
+The helper method will build our selctor and modifier for the update. The update is also passed `upsert = true` to ensure the document is created if no existing match is found and `multi = false` in order to only update a single document.
 ```scala
   private def doInsert(user: User) = collection.map {
     val selector = Json.obj("email" -> user.email)
@@ -314,7 +348,7 @@ The helper methos will build our selctor and modifier for the update. The update
     }
   }
 ```
-### The route
+### Routing
 And the route as the final piece.
 ```
 PUT     /user/                    controllers.UserController.insertUser()
@@ -352,8 +386,9 @@ Invalid input format
 
 ## DELETE /user/email/:email
 ---
+The delete method is fairly straightforward
 
-```
+```scala
   def deleteUser(email: String): Action[AnyContent] = Action.async {
     collection.map{
       val selector = Json.obj({"email" -> email})
@@ -368,8 +403,26 @@ Invalid input format
   }
 ```
 
-## Test it
----
+### Routing
+```
+DELETE  /user/email/:param        controllers.UserController.deleteUser(param)
+```
+
+### Test it
+Delete a nonexistent user
+```
+$ curl -i -X DELETE localhost:9000/user/email/nonexistent@example.com
+
+HTTP/1.1 200 OK
+Referrer-Policy: origin-when-cross-origin, strict-origin-when-cross-origin
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: master-only
+Date: Sun, 20 Oct 2019 10:02:12 GMT
+Content-Length: 0
+```
+Check is a specific user exists
 ```
 $ curl -i -X GET http://localhost:9000/user/email/gladys.andrews@example.com
 
@@ -381,7 +434,9 @@ X-Content-Type-Options: nosniff
 X-Permitted-Cross-Domain-Policies: master-only
 Date: Sat, 19 Oct 2019 23:22:23 GMT
 Content-Length: 0
-
+```
+Add a user to delete
+```
 $ curl -i -X PUT http://localhost:9000/user/ -H 'Content-Type: application/json' -d '{"gender":"female","name":{"title":"Miss","first":"Gladys","last":"Andrews"},"location":{"street":{"number":6151,"name":"Spring Hill Rd"},"city":"Princeton","state":"Florida","country":"United States","postcode":83886},"email":"gladys.andrews@example.com","phone":"(689)-603-9010","picture":{"large":"https://randomuser.me/api/portraits/women/35.jpg","medium":"https://randomuser.me/api/portraits/med/women/35.jpg","thumbnail":"https://randomuser.me/api/portraits/thumb/women/35.jpg"},"nat":"US"}'
 
 HTTP/1.1 201 Created
@@ -392,7 +447,9 @@ X-Content-Type-Options: nosniff
 X-Permitted-Cross-Domain-Policies: master-only
 Date: Sat, 19 Oct 2019 23:21:20 GMT
 Content-Length: 0
-
+```
+Confirm the user was added
+```
 $ curl -i -X GET http://localhost:9000/user/email/gladys.andrews@example.com
 
 HTTP/1.1 200 OK
@@ -406,7 +463,9 @@ Content-Type: application/json
 Content-Length: 498
 
 [{"gender":"female","name":{"first":"Gladys","last":"Andrews","title":"Miss"},"location":{"street":{"number":6151,"name":"Spring Hill Rd"},"city":"Princeton","state":"Florida","postcode":83886,"country":"United States"},"email":"gladys.andrews@example.com","phone":"(689)-603-9010","picture":{"medium":"https://randomuser.me/api/portraits/med/women/35.jpg","large":"https://randomuser.me/api/portraits/wondlarsen@master:~/src/fullstack-webapp-guide$ 
-
+```
+Delete the recently added user
+```
 $ curl -i -X DELETE http://localhost:9000/user/email/gladys.andrews@example.com
 
 HTTP/1.1 200 OK
@@ -417,7 +476,9 @@ X-Content-Type-Options: nosniff
 X-Permitted-Cross-Domain-Policies: master-only
 Date: Sat, 19 Oct 2019 23:21:56 GMT
 Content-Length: 0
-
+```
+Confirm that the user was deleted
+```
 $ curl -i -X GET http://localhost:9000/user/email/gladys.andrews@example.com
 
 HTTP/1.1 404 Not Found
@@ -434,4 +495,19 @@ This is the basic fuctionality. I extended the controller with a few methods and
 
 ## Dockerize it
 ---
+As a final task we need to build a container with the application. There are a quite a few different approaches to this and for the purpose of example I just chose to copy the sources into a cotainer and run the project in production mode via sbt. For this to work we need to
+* add an application secret to the application
+* write a Dockerfile
+* add a service to the docker-compose.yml
 
+### Application secret
+The purpose of the application secret is described [here](https://www.playframework.com/documentation/2.7.x/ApplicationSecret) as well as best practises. Now, We're breaking a rather important best practise by placing the application secret in the configuration file but for the this purpose it does not really matter. Don't do this on production, though. In `conf/application.conf` add
+```conf
+play.http.secret.key = "some-secret"
+```
+
+### Dockerfile
+
+```
+
+```
