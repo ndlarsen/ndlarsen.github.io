@@ -13,7 +13,7 @@ This post will show you how to generate a barebones page and preview it locally.
 ---
 Jekyll comes with the functionality to generate a skeleton for your site. Suppose your new site project would be called "bitsAndPieces", you would generate the skeleton like this:
 ```
-jekyll new bitsAndPieces
+bundle exec jekyll new bitsAndPieces
 ```
 This will generate a folder named *bitsAndPieces* with contents similar to the following:
 ```
@@ -35,7 +35,7 @@ Now, the *_posts* directory is the place to put your posts and as you can see th
 ---
 You can view the page locally navigating into the project folder and running
 ```
-jekyll serve -w
+bundle exec jekyll serve -w
 ```
 This command builds the site and runs a local version accessible at `localhost:4000`. The `-w` switch (shorthand for `--watch`) enables jekyll to continuously monitor the directory and rebuild when changes are made. This way you don't have to restart the process every time you need the review a change.
 

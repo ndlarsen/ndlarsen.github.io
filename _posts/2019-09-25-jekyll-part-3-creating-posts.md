@@ -34,14 +34,14 @@ As you already know, the *_posts* folder will contain your posts. The file conte
 As in [part 2]({% post_url 2019-09-24-jekyll-part-2-generating-a-barebones-page %}) you can preview the post by running the command below from within the project folder and there you go.
 
 ```
-jekyll serve -w
+bundle exec jekyll serve -w
 ```
 
 ## Drafts
 ---
 From time to time might want to keep drafts in the project without having them displayed. Create a *_drafts* folder with the project and place your draft in there. Jekyll won't build those when building or previewing the side unless explicitly told to as below.
 ```
-jekyll serve -w --draft
+bundle exec jekyll serve -w --draft
 ```
 
 ## Skeleton post
