@@ -11,7 +11,7 @@ Being able to test/verify a systemd unit file while writing it without having to
 
 ### systemd-analyze
 `systemd-analyse` can verify the syntax of a unit file. Given this unit definition (which is incorrect):
-```
+```systemd
 [Unit]
 Description=runs "relays.sh test"
 
@@ -34,7 +34,7 @@ will output
 /home/pi/client/./relays.service:6: Unknown lvalue 'After' in section 'Service', ignoring
 ```
 which tells us that I messed up the unit definition and where. Correcting the content to
-```
+```systemd
 [Unit]
 Description=runs "relays.sh test"
 Requires=network-online.target

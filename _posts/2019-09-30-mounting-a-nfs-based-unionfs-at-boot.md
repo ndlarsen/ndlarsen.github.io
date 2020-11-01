@@ -129,7 +129,7 @@ Requires=network.target nfs.service mnt-proddata.mount
 The unit definition only has a unit description and a few dependencies based the previously mentioned hard earned lesson. Initially I used the `After` directive rather that `Requires` but recently learned that `Requires` sets a stricter dependency. The directive will cause the dependencies to be loaded or fail the unit if the requirements cannot be met. The listed requirements ensures that both the network and NFS services are up and that the needed data mount is acutually mounted.
 
 #### Section: \[Mount\]
-```
+```systemd
 [Mount]
 What=overlayfs
 Where=/mnt/data/testdata
@@ -139,7 +139,7 @@ Options=nofail,lowerdir=/mnt/prod_data,upperdir=/mnt/data/diff,workdir=/mnt/data
 This section is just the previous filesystem table entry converted into a type section. I added `nofail` to prevent the boot process from halting if loading the unit fails.
 
 #### Section: \[Install\]
-```
+```systemd
 [Install]
 WantedBy=multi-user.target
 ```
@@ -147,7 +147,7 @@ The `WantedBy` directive defines when the unit should be enabled. `multi-user.ta
 
 #### The combined unit file
 The final result is the file `/etc/systemd/system/mnt-data-testdata.mount` with the content below
-```
+```systemd
 [Unit]
 Description=Data mounted under OverlayFS
 After=network.target nfs.service mnt-proddata.mount
