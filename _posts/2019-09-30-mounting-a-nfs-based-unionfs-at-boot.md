@@ -105,7 +105,7 @@ Having finally located the cause a proper solution could be made. Rather than at
 
 ### Unit files
 It seems that everything systemd handles are defined as units whether it is devices, services or [targets](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/sect-managing_services_with_systemd-targets) (systemd replacement for [runlevels](https://en.wikipedia.org/wiki/Runlevel)) et al. Custom systemd unit files should be located in `/etc/systemd/system/` and the file names should honour a specific convention. For mount units the convention is a translation of the mount path and if your unit is supposed to be mounted under `/mnt/data/testdata` the file should be named `mnt-data-testdata.mount`. Be aware that speciel characters not are allowed in the unit file names and should be escaped. Luckily systemd comes with a utility for that, `systemd-escape` will parse and convert a string into the proper format. The anatomy of a unit file is pretty simple. It is composed of sections each defined by a case sensitive header and containing case sensitive key-value directives defining behaviour or metadata as outlined below
-```
+```systemd
 [Section]
 Directive=value
 ```
@@ -121,7 +121,7 @@ Generally speaking there are section categories
 In our case the unit file is pretty basic. It will consist of \[Unit\], \[Mount\] and \[Install\].
 
 #### Section: \[Unit\]
-```
+```systemd
 [Unit]
 Description=Data mounted under OverlayFS
 Requires=network.target nfs.service mnt-proddata.mount
