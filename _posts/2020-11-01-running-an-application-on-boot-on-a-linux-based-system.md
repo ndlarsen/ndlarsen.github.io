@@ -49,7 +49,7 @@ ExecStart=/path/to/script.sh
 [Install]
 WantedBy=multi-user.target
 ```
-This is the simple version. Additional options are available. After this you should reload systemd service difinitions and enable the service:
+This is the simple version. Additional options are available. After this you should reload systemd service definitions and enable the service:
 ```
 systemctrl daemon-reload
 ```
