@@ -41,6 +41,10 @@ OnCalendar=daily
 WantedBy=multi-user.target
 ```
 The `OnCalendar` attribute defines that the timer will trigger the service at midnight every day. The systemd documentation on [OnCalendar](https://www.freedesktop.org/software/systemd/man/systemd.time.html#) outlines the format there of pretty well and it provides ganularity not unlike cron.
-Should one want the ensure the timer is triggered at first possible time in case the system is shut down during the trigger time, one can add `Persistent=true` to the `[Unit]` section
+Should one want the ensure the timer is triggered at first possible time in case the system is shut down during the trigger time, one can add `Persistent=true` to the `[Unit]` section. All there is left at this point is to enable/start the timer by running
+```
+sudo systemctrl enable disk-usage-logger.timer
+sudo systemctrl start disk-usage-logger.timer
+```
 
 Enjoy.
