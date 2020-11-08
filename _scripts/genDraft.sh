@@ -34,12 +34,13 @@ filename=$(echo $1 | sed -e 's/./\L&/g' -e 's/\s/-/g' -e 's/[^[:alnum:]-]//g')
 
 categories=`join_by "," ${@:2}`
 
-FRONT_MATTER="---
+cat << END > "$dd-$filename.md"
+---
 layout: $layout
-title: \"$1\"
+title: "$1"
 date: $dd $dt
 categories: [$categories]
 ---
-"
 
-echo "$FRONT_MATTER" > "$dd-$filename.md"
+## Preface
+END
