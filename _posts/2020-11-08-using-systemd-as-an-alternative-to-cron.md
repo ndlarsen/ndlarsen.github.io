@@ -2,7 +2,7 @@
 layout: post
 title: "Using systemd as an alternative to cron"
 date: 2020-11-08 15:32:41 +0100
-categories: [linux,systemd,cron,today I leaned]
+categories: [linux,systemd,cron,today I learned]
 ---
 
 ## Preface

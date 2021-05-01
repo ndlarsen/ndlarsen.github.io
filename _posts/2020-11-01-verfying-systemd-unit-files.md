@@ -2,7 +2,7 @@
 layout: post
 title: "Verfying systemd unit files"
 date: 2020-11-01 17:21:35 +0100
-categories: [linux,systemd,today I leaned]
+categories: [linux,systemd,today I learned]
 ---
 
 ## Preface
