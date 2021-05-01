@@ -2,7 +2,7 @@
 layout: post
 title: "User based update-alteratives for terraform"
 date: 2021-04-30 18:05:01 +0200
-categories: [linux,terraform,today,I,leaned]
+categories: [linux,terraform,today I leaned]
 ---
 
 ## Preface
