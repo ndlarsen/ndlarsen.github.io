@@ -32,7 +32,7 @@ layout=post
 
 filename=$(echo $1 | sed -e 's/./\L&/g' -e 's/\s/-/g' -e 's/[^[:alnum:]-]//g')
 
-categories=`join_by "," ${@:2}`
+categories=`join_by "," "${@:2}"`
 
 cat << END > "$dd-$filename.md"
 ---
