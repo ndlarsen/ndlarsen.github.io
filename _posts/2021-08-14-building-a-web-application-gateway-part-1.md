@@ -13,7 +13,8 @@ Recently, I bought a NAS device, more specifically, the
 a point where I needed more available storage, I also wanted to self-host services such as
 [Nextcloud](https://nextcloud.com/) and
 [Vaultwarden (Bitwarden compatible)](https://github.com/dani-garcia/vaultwarden) on my LAN behind a
-[VPN](https://en.wikipedia.org/wiki/Virtual_private_network). As all of these services will be available both on the LAN and via VPN on individual subdomains under a domain from a dynamic DNS provider as either
+[VPN](https://en.wikipedia.org/wiki/Virtual_private_network). As all of these services will be available both on the LAN
+and via VPN on individual subdomains under a domain from a dynamic DNS provider as either
 `mydomain.ddnsprovider.tld/service` or `service.mydomain.ddnsprovider.tld` I eventually found myself in need of a
 [web application gateway](https://en.wikipedia.org/wiki/Application-level_gateway)
 
@@ -24,7 +25,8 @@ just wanted a decent hardware platform onto which I could install an arbitrary L
 eventually and inevitably reaches end-of-life and in the meantime could deploy docker containers to. Even though the
 Lockerstor 4 does check both those boxes, I do have (quite) a few niggles and moans about the design decisions made by
 Asustor going into the software platform. I guess there is a certain degree of configurability and control, that I
-prefer, which is difficult to maintain while also ensuring some degree of simplicity and usability and I found myself setting up several init scripts to circumvent some of the platforms limitations - but I digress...
+prefer, which is difficult to maintain while also ensuring some degree of simplicity and usability and I found myself
+setting up several init scripts to circumvent some of the platforms limitations - but I digress...
 
 Since a [Vaultwarden server docker image](https://hub.docker.com/r/vaultwarden/server) was already available I figured
 that setting up a Vaultwarden instance would be simple and to some degree it was but during testing the Vaultwarden
@@ -48,7 +50,7 @@ renewed. This I already knew and it is in itself not a massive problem but it do
 renewal automatically. I initially though I would use ADM's Certificate Manager, ADM being the Asustor software on the
 NAS, for this but, at the time of writing, Certificate Manager only supports certificate renewal via
 [domain validation](https://en.wikipedia.org/wiki/Domain-validated_certificate) and
-[HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/#http-01-challenge). Now, I am okay with using Domain
+[HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/#http-01-challenge). Now, I am okay with using domain
 validation but a http-01 challenge requires ports 80 and 443 to be exposed to the internet and I did __not__ want that.
 
 #### A solution to A
@@ -78,7 +80,9 @@ of direct/indirect and synchronous/asynchronous communication.
 4. indirect restart via publish-subscribe implementation
 5. indirect restart via intermediate service manager service
 
-While all of these proposed solutions certainly are possible (and would be fun to implement), they generally introduce complexity to the setup to a degree which I think far outweighs their individual benefits. I think none of them are appropriate due to the latter in combination with following:
+While all of these proposed solutions certainly are possible (and would be fun to implement), they generally introduce
+complexity to the setup to a degree which I think far outweighs their individual benefits. I think none of them are 
+appropriate due to the latter in combination with following:
 
 1. allowing a containerized process to manipulate processes on the host system appears to be an anti-pattern, a security
    risk and a catastrophe waiting to happen
@@ -101,7 +105,8 @@ the ssl certificate this is not possible, so the question must be whether or not
 elsewhere.
 
 #### A solution to B
-After digging around a while and talking to people far smarter than me, it appears that a solution could be a [reverse proxy](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiluvSI17DyAhXm8rsIHWoZCqAQFnoECAIQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FReverse_proxy&usg=AOvVaw2MMiofgTfxGMTpQjv60S9E).
+After digging around a while and talking to people far smarter than me, it appears that a solution could be a
+[reverse proxy](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiluvSI17DyAhXm8rsIHWoZCqAQFnoECAIQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FReverse_proxy&usg=AOvVaw2MMiofgTfxGMTpQjv60S9E).
 Put in as few words as possible, a reverse proxy is an intermediate service which when asked for resources by a client
 will fetch the resources requested from an alternative backend and return them to the requesting client. There are many
 different implementations, [nginx](https://www.nginx.com/) being a widely used one. As the nginx instance will be
@@ -134,4 +139,5 @@ application level, that is, I will lump the things together that I think belongs
   including both the certificate renewal and reverse proxy for easier reloading thereof
 
 ## Postface
-I plan on writing two additional posts as part of this series. The next related to setting up dynamic DNS renewal and local DNS. The final part being related to certificate generation/renewal and setting up the reverse proxy.
+I plan on writing two additional posts as part of this series. The next related to setting up dynamic DNS renewal and
+local DNS. The final part being related to certificate generation/renewal and setting up the reverse proxy.
