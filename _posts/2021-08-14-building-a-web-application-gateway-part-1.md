@@ -139,5 +139,10 @@ application level, that is, I will lump the things together that I think belongs
   including both the certificate renewal and reverse proxy for easier reloading thereof
 
 ## Postface
+At this point I think it is worth mentioning that [linuxserver.io](https://www.linuxserver.io/) has released, what
+appears to be, an excellent web application gateway called [SWAG](https://docs.linuxserver.io/general/swag). Now, could
+I use this instead? Sure. Why am I not, then? Well, because, firstly, it does far more than I need for this and,
+secondly, I would not be learning anything. If I had the need to expose my applications to the general internet, I would probably use SWAG, though.
+
 I plan on writing two additional posts as part of this series. The next related to setting up dynamic DNS renewal and
 local DNS. The final part being related to certificate generation/renewal and setting up the reverse proxy.
