@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "User based update-alteratives for terraform"
+title: "User based update-alternatives for terraform"
 date: 2021-04-30 18:05:01 +0200
 categories: [linux,terraform,today I learned]
 ---
@@ -15,21 +15,21 @@ At work we are using [terraform](https://en.wikipedia.org/wiki/Terraform_(softwa
 
 I will say, though, that one of the things about terraform as a tool, is that it has been evolving and improving quite a lot during the past few years. This in part due to the constant evolution of its supported providers (AWS, Azure et al.) and in part due to the [DSL](https://en.wikipedia.org/wiki/Domain-specific_language) being fairly immature and limited to begin with. As a consequence of this, HashiCorp has been releasing new versions of terraform fairly often and every once in a while changes have been breaking and thus requiring, sometimes substantial, rewrites.
 
-At work we are striving towards a DevOps-y environment supported by a (micro)service oriented architecture and as such we are supporting and maintaining quite a few services in total, many of which the team I belong to are mostly resposible for. An unfortunate consequence of this has been that not all services has been receiving the same amount of attention and maintenance as one would ideally like (I might just write a post on this later on) and as such we find ourselves using different versions of terraform on a daily basis. Currently I have 0.11 thought 0.15 installed and in use regularly. Software engineers are "lazy" in the sense that repeatable tasks are candidates for scripting and/or automation. This means we are having a collection of utility scripts which all expects the terraform binary to actually be named terrraform and not perhaps terraform14.
+At work we are striving towards a DevOps-y environment supported by a (micro)service oriented architecture and as such we are supporting and maintaining quite a few services in total, many of which the team I belong to are mostly responsible for. An unfortunate consequence of this has been that not all services has been receiving the same amount of attention and maintenance as one would ideally like (I might just write a post on this later on) and as such we find ourselves using different versions of terraform on a daily basis. Currently I have 0.11 thought 0.15 installed and in use regularly. Software engineers are "lazy" in the sense that repeatable tasks are candidates for scripting and/or automation. This means we are having a collection of utility scripts which all expects the terraform binary to actually be named terraform and not perhaps terraform14.
 
 At work, as at home, I am running a Debian Linux based system, most of us in my subdivision are, at least while at work. Many of us, myself included, have resorted to use the `Debian Alternatives System` which enables us to have multiple versions of an binary or application installed and switch between them fairly easy. If you are reading this, you probably already know of this system. A downside of this, though, is that by default the alternatives system maintains everything in system directories that require root level privileges to manipulate and thus needs to be run as a privileged user, e.g. via `sudo`. For system level applications, this can make sense but I do not think it does in this case and is unneeded because
 
 1. terraform is not really a system level command with system level impact (at least not on the system on which it is run)
-2. my current need for at specific terrraform version, or e.g. Java for that matter, should have no impact on other users, if any, on the same system.
+2. my current need for at specific terraform version, or e.g. Java for that matter, should have no impact on other users, if any, on the same system.
 
 Adding to that, having to type my password every time I need to change terraform version is just excruciating.
 
-Fortunately, there is a way to achieve this via the existing alternatives system but unfortunately not as simple as just passing e.g. a `--user` commandline flag to `update-alternatives` or edting a configuration file and be done with it. It takes a little more work to do this and I solved by using other existing commandlie flags to `update-alternatives` and implementing a wrapper script to handle it. Before actually, doing it, I think it is well worth having a look at what the alternatives system is and how it actually works.
+Fortunately, there is a way to achieve this via the existing alternatives system but unfortunately not as simple as just passing e.g. a `--user` command line flag to `update-alternatives` or editing a configuration file and be done with it. It takes a little more work to do this and I solved by using other existing command line flags to `update-alternatives` and implementing a wrapper script to handle it. Before actually, doing it, I think it is well worth having a look at what the alternatives system is and how it actually works.
 
 ## The _Debian Alternatives System_
 ---
 ### What it is
-As mentioned before, and as you might know, the alternatives system gives us the ability to have multiple binaries which provides similar funtionality installed at the same time while having a specific one defined as default. What this means is that I can install e.g. both openjdk-8 and openjdk-11 and switch between by them defining the default depending on need. So on a system I installed both versions with openjdk-8 currently as default:
+As mentioned before, and as you might know, the alternatives system gives us the ability to have multiple binaries which provides similar functionality installed at the same time while having a specific one defined as default. What this means is that I can install e.g. both openjdk-8 and openjdk-11 and switch between by them defining the default depending on need. So on a system I installed both versions with openjdk-8 currently as default:
 
 ```console
 ~$ update-alternatives --display java
@@ -169,7 +169,7 @@ terraform - auto mode
 /home/vboxuser/bin/terraform15 - priority 1
 ```
 ### A _small_ issue and a few suboptimal approaches to a "solution"
-At this point we can handle the registered binaries as we normally would, albeit we need to supply the `altdir` and `admindir` flags each time which does get just as cumbersome as having to supply sudo and a password, if not worse. I can think of two approaches to solve this but none of them are really great and both causes us to lose the ability to tab-complete with this funtionality and I _really_ like my tab-completion. We can either add an alias to our shell
+At this point we can handle the registered binaries as we normally would, albeit we need to supply the `altdir` and `admindir` flags each time which does get just as cumbersome as having to supply sudo and a password, if not worse. I can think of two approaches to solve this but none of them are really great and both causes us to lose the ability to tab-complete with this functionality and I _really_ like my tab-completion. We can either add an alias to our shell
 ```bash
 alias updateAlt='update-alternatives --altdir .local/etc/alternatives/ --admindir .local/var/lib/alternatives/'
 ```
