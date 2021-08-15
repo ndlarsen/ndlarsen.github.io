@@ -42,6 +42,7 @@ certificate anyway, I though I might as well use this for the remaining services
 host. Thinking this would be fairly simple to do, I began...
 
 ## A few roadbumps
+---
 
 ### Issue A
 
@@ -121,6 +122,7 @@ a solution to this could be composed of the following tasks:
   reverse proxy
 
 ## What Web Application Gateway?
+---
 In summary, I need one or more applications capable of fulfilling following requirements:
 
 * automate A record renewal
@@ -141,6 +143,7 @@ containers/applications.
   including both the certificate renewal and reverse proxy for easier reloading thereof
 
 ## Postface
+---
 At this point I think it is worth mentioning that [linuxserver.io](https://www.linuxserver.io/) has released, what
 appears to be, an excellent web application gateway called [SWAG](https://docs.linuxserver.io/general/swag). Now, could
 I use this instead? Sure. Why am I not, then? Well, because, firstly, it does far more than I need for this and,

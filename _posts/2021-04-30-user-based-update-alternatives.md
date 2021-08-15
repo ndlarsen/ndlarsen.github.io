@@ -158,8 +158,8 @@ To sum it up, the `Debian Alternatives System` works by manipulating symbolic li
 its alternatives while maintaining meta data in a file based "database".
 
 ## Utilizing the _Debian Alternatives System_ as a user
-### How?
 ---
+### How?
 According the command `update-alternatives` man page, `altdir` and `admindir` can be manually defined when called.
 
 Seeing as we want to do this for the given user, these directories should be located within that users home directory.
