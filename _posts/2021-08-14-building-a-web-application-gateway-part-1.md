@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building a simple web application gateway, part 1 - introduction"
+title: "Building a simple web application gateway, part 1 - first steps"
 subtitle: "or \"I bought a NAS - A journey into self-hosting begins\""
 date: 2021-08-14 10:18:33 +0200
 categories: [linux,nginx,SSL,docker,self-host,"reverse proxy",nginx,"web application gateway"]
