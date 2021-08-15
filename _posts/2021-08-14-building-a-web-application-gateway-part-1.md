@@ -152,5 +152,10 @@ secondly, I would not be learning anything. If I had the need to expose my appli
 definitely use something more secure, more thoroughly tested and better supported than any homebrewed solution. This
 solution might just be SWAG.
 
-I plan on writing additional two posts as part of this series. The next related to setting up dynamic DNS renewal and
-local DNS. The final part being related to certificate generation/renewal and setting up the reverse proxy.
+I plan on writing additional three posts as part of this series. The next related to setting up dynamic DNS renewal, one
+on setting up a local DNS and the final part being related to certificate generation/renewal and setting up the reverse
+proxy.
+
+Part 2 in the series can be found here: [Building a simple web application gateway, part 2](building-a-simple-web-application-gateway-part-2)
+
+Enjoy.
