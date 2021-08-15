@@ -7,18 +7,24 @@ categories: [jekyll,liquid]
 
 ## Preface
 ---
-As the amount of posts grows, the amount of post on the index/front page grows as well, at least while using simple themes such as [Minima](https://github.com/jekyll/minima). In order to limit the amount of posts displayed on a single page, we need to add pagination. This functionality is available from some og the more advanced themes but again, Where is the fun in that?
+As the amount of posts grows, the amount of post on the index/front page grows as well, at least while using simple
+themes such as [Minima](https://github.com/jekyll/minima). In order to limit the amount of posts displayed on a single
+page, we need to add pagination. This functionality is available from some og the more advanced themes but again, Where
+is the fun in that?
 
 ## Setup
 ---
-In order for this to work there is a little setup we need to do. We need to set a post per page limit and add a permalink defining the url each paginated page can be accessed at. Both these will be added to the *_config.yml*.
+In order for this to work there is a little setup we need to do. We need to set a post per page limit and add a
+permalink defining the url each paginated page can be accessed at. Both these will be added to the *_config.yml*.
 
 ```yaml
 paginate: 5
 paginate_path: /posts/page:num
 ```
 
-This will set the post per page limit to 5 and ensure that the paginated pages can be accessed at eg. `yourblog.domain/posts/page1`. We need to add a pagination plugin to the project as well. I'm using *jekyll-paginate* as this is supported by Github Pages. Add the plugin to the *Gemfile*:
+This will set the post per page limit to 5 and ensure that the paginated pages can be accessed at eg.
+`yourblog.domain/posts/page1`. We need to add a pagination plugin to the project as well. I'm using
+*jekyll-paginate* as this is supported by Github Pages. Add the plugin to the *Gemfile*:
 
 ```
 group :jekyll_plugins do
@@ -36,7 +42,8 @@ Finally, rename the *index.md* in the project root to *index.html*.
 
 ## Implement
 ---
-We need to add the pagination functionality to the leyout template that generates the list of posts which is *_layouts/home.html*. This layout is in turn used from *index.html*. The original version of it can be seen below.
+We need to add the pagination functionality to the leyout template that generates the list of posts which is
+*_layouts/home.html*. This layout is in turn used from *index.html*. The original version of it can be seen below.
 
 ### The original template
 ```liquid
@@ -187,4 +194,6 @@ In order to center the pagination links horizontally add the css below to */asse
 
 And we're done. Enjoy.
 
-The next part of the series, [Jekyll, part 8: Displaying categories on posts]({% post_url 2019-09-29-jekyll-part-8-displaying-categories-on-posts %}), will focus on displaying categories on posts.
+The next part of the series,
+[Jekyll, part 8: Displaying categories on posts]({% post_url 2019-09-29-jekyll-part-8-displaying-categories-on-posts %}),
+will focus on displaying categories on posts.

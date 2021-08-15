@@ -7,9 +7,11 @@ categories: [jekyll]
 
 ## Preface
 ---
-I'm assuming you're running a Linux distribution. In my case it's Ubuntu 20.04. If you're running another distribution you should be able to figure out what commands your preferred distributions package managers equivalent commands are.
+I'm assuming you're running a Linux distribution. In my case it's Ubuntu 20.04. If you're running another distribution
+you should be able to figure out what commands your preferred distributions package managers equivalent commands are.
 
-Now, there are a jekyll package available from the repositories and while it might work just fine for your needs, it is quite outdated and as such we're going the gem route.
+Now, there are a jekyll package available from the repositories and while it might work just fine for your needs, it is
+quite outdated and as such we're going the gem route.
 
 ## Dependencies and initial setup
 ---
@@ -57,4 +59,6 @@ bundle exec jekyll -v
 
 That's it. Jekyll is installed and ready to use.
 
-The next part of the series, [Jekyll, part 2: Generating a barebones page]({% post_url 2019-09-24-jekyll-part-2-generating-a-barebones-page %}), will focus on getting a template site up and running.
+The next part of the series,
+[Jekyll, part 2: Generating a barebones page]({% post_url 2019-09-24-jekyll-part-2-generating-a-barebones-page %}), will
+focus on getting a template site up and running.

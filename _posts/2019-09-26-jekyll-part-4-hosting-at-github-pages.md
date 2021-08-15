@@ -7,11 +7,16 @@ categories: [jekyll,github]
 
 ## Preface
 ---
-Creating and running the site locally is all fine well but the point of making it all is probably to share it with others. Some sort of hosting is needed for that and while there are several options available, using Github Pages is easy, free and tailored for Jekyll. All we need to do is just create a respository and push the project to Githuib Pages via git.
+Creating and running the site locally is all fine well but the point of making it all is probably to share it with
+others. Some sort of hosting is needed for that and while there are several options available, using Github Pages is
+easy, free and tailored for Jekyll. All we need to do is just create a repository and push the project to Github
+Pages via git.
 
 ## Creating the repository
 ---
-You'll need a Github account for this so go create it you don't already have one. Go create a new repository, note that the repository for the site must be named by following convention: `username.github.io`. The repository shoud be public, not have a README, .gitignore or license.
+You'll need a Github account for this so go create it you don't already have one. Go create a new repository, note that
+the repository for the site must be named by following convention: `username.github.io`. The repository should be
+public, not have a README, .gitignore or license.
 
 ## Pushing the code
 ---
@@ -32,4 +37,6 @@ git push
 
 Your new site should be available at https://username.github.io shortly after.
 
-The next part of the series, [Jekyll, part 5: Adding a categories page]({% post_url 2019-09-26-jekyll-part-5-adding-a-categories-page %}), will focus on creating a categories page using [Liquid](https://jekyllrb.com/docs/liquid/) templating language.
+The next part of the series,
+[Jekyll, part 5: Adding a categories page]({% post_url 2019-09-26-jekyll-part-5-adding-a-categories-page %}), will focus
+on creating a categories page using [Liquid](https://jekyllrb.com/docs/liquid/) templating language.

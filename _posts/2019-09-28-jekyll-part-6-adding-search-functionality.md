@@ -7,13 +7,23 @@ categories: [jekyll,liquid,javascript]
 
 ## Preface
 ---
-As the amount of content on a site grows it becomes increasingly difficult to maintain some sort of insight in the total content or finding what you need. Adding search functionality will help alleviate that and in my opinion it's simply a necessity as well as a fundamental service to provide your users. As a jekyll site is generated, static and lacking server-side functionality, all search must be done client-side. Well, I guess you could add Google Custom Search but to be fair, why would you? Besides it being Google, the search functionality will depend on the availability of a third party which you might not want and you will have very little control over it.
+As the amount of content on a site grows it becomes increasingly difficult to maintain some sort of insight in the total
+content or finding what you need. Adding search functionality will help alleviate that and in my opinion it's simply a
+necessity as well as a fundamental service to provide your users. As a jekyll site is generated, static and lacking
+server-side functionality, all search must be done client-side. Well, I guess you could add Google Custom Search but to
+be fair, why would you? Besides it being Google, the search functionality will depend on the availability of a third
+party which you might not want and you will have very little control over it.
 
-There seem to be quite a few different approaches and solutions available, most relying on JavaScript implementations. Having looked at a few by now and wanting full post seach, I decided trying out [Lunr](https://lunrjs.com/) which some say is a [Solr](https://lucene.apache.org/solr/)-like search  implementation. Lunr is an inverted index and it can be compared to the index in the back of a book. Should you want a lille lighter implementation without full post search, [simple-jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) seems to be a popular choice.
+There seem to be quite a few different approaches and solutions available, most relying on JavaScript implementations.
+Having looked at a few by now and wanting full post search, I decided trying out [Lunr](https://lunrjs.com/) which some
+say is a [Solr](https://lucene.apache.org/solr/)-like search  implementation. Lunr is an inverted index and it can be
+compared to the index in the back of a book. Should you want a lille lighter implementation without full post search,
+[simple-jekyll-search](https://github.com/christian-fei/Simple-Jekyll-Search) seems to be a popular choice.
 
 ## Getting the source
 ---
-At the time of writing, the latest version of Lunr id 2.3.6 and is available via npm and from [unpkg](https://upkg.com). Create a folder names *assets* within the site project and run:
+At the time of writing, the latest version of Lunr id 2.3.6 and is available via npm and from [unpkg](https://upkg.com).
+Create a folder names *assets* within the site project and run:
 
 ```
 wget -P assets/ https://unpkg.com/lunr@2.3.6/lunr.js
@@ -21,7 +31,10 @@ wget -P assets/ https://unpkg.com/lunr@2.3.6/lunr.js
 
 ## The search index
 ---
-Lunr needs the be fed all the data you want to be searchable in order to create the index. In our case the index will be based on a map-like structure of JavaScript objects representing our posts each consisting of an identifier and searchable fields. We need to generate the data list which we'll do when the site is build using Liquid templating and a bit of JavaScript. Populating the index will be done afterwards using JavaScript only.
+Lunr needs the be fed all the data you want to be searchable in order to create the index. In our case the index will be
+based on a map-like structure of JavaScript objects representing our posts each consisting of an identifier and
+searchable fields. We need to generate the data list which we'll do when the site is build using Liquid templating and a
+bit of JavaScript. Populating the index will be done afterwards using JavaScript only.
 
 ### Overall approach
 When page loads:
@@ -30,7 +43,12 @@ When page loads:
 >   * add relevant post data to data list
 >* when seach page loads add posts to index
 
-Add a *search-index.js* to the *assets* folder in the project. This will contain the templating code to generate the data list as well as the index. The first code block is generating the data store. I know it looks a bit wierd with a Front Matter inside a JavaScript file but this is needed in order to have Jekyll picking up the file and compile it. The only thing this bit of code does, is creatig a JavaScript object with references named as the urls of our posts mapping to a representation of the post itself. This structure will come in handy later when we need to generate a list of links from the search result.
+Add a *search-index.js* to the *assets* folder in the project. This will contain the templating code to generate the
+data list as well as the index. The first code block is generating the data store. I know it looks a bit weird with a
+Front Matter inside a JavaScript file but this is needed in order to have Jekyll picking up the file and compile it. The
+only thing this bit of code does, is creating a JavaScript object with references named as the urls of our posts mapping
+to a representation of the post itself. This structure will come in handy later when we need to generate a list of links
+from the search result.
 
 ```javascript
 {% raw %}
@@ -51,7 +69,8 @@ const store = {
 {% endraw %}
 ```
 
-The next part initializes the Lunar index with the post url as reference and populates the index with our data. The boost parameter at the title field tells Lunr to weight occurences of the search term higher if it occurs in the title.
+The next part initializes the Lunar index with the post url as reference and populates the index with our data. The
+boost parameter at the title field tells Lunr to weight occurrences of the search term higher if it occurs in the title.
 
 ```javascript
 {% raw %}
@@ -77,7 +96,9 @@ const index = lunr(function(){
 
 ## The search page
 ---
-With the "search engine" complete we still need a place to execute the seach and view the results. Create a file named *search.html* in the project root. In that we'll add the HTML form to actually search with and import the remainder of the JavaScript which we'll write later. Jekyll should detect this file  automatically and add a link the index page.
+With the "search engine" complete we still need a place to execute the search and view the results. Create a file named
+*search.html* in the project root. In that we'll add the HTML form to actually search with and import the remainder of
+the JavaScript which we'll write later. Jekyll should detect this file  automatically and add a link the index page.
 
 ```html
 ---
@@ -107,10 +128,12 @@ title: Search
 
 ## Gluing it all together
 ---
-In order for us to actually execute a search and display the results, we need to add some helper functions to hold it all together. Place the script below in */assets/search-helper.js*
+In order for us to actually execute a search and display the results, we need to add some helper functions to hold it
+all together. Place the script below in */assets/search-helper.js*
 
 ### Overall approach
-When the page is done loading and the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) is ready:
+When the page is done loading and the
+[DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction) is ready:
 
 >* get search terms from url
 >* if no search terms
@@ -185,4 +208,5 @@ function setTextAndDisplay(text){
 ```
 That's it, try it out.
 
-The next part of the series, [Jekyll, part 7: Pagination]({% post_url 2019-09-29-jekyll-part-7-pagination %}), will focus on adding pagination to the site.
+The next part of the series, [Jekyll, part 7: Pagination]({% post_url 2019-09-29-jekyll-part-7-pagination %}), will
+focus on adding pagination to the site.

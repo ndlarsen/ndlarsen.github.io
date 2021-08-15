@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Verfying systemd unit files"
+title: "Verifying systemd unit files"
 date: 2020-11-01 17:21:35 +0100
 categories: [linux,systemd,today I learned]
 ---
@@ -47,6 +47,6 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 ```
-and running it again yield no output indicationg that the syntax of the unit file is correct.
+and running it again yield no output indicating that the syntax of the unit file is correct.
 
 Enjoy.
