@@ -13,7 +13,7 @@ Recently, I bought a NAS device, more specifically, the
 [Asustor Lockerstor 4 (AS6604T)](https://www.asustor.com/product?p_id=69). I did this as, in addition to just reaching
 a point where I needed more available storage, I also wanted to self-host services such as
 [Nextcloud](https://nextcloud.com/) and
-[Vaultwarden](https://github.com/dani-garcia/vaultwarden)(Bitwarden compatible backend) on my LAN behind a
+[Vaultwarden](https://github.com/dani-garcia/vaultwarden) (Bitwarden compatible backend) on my LAN behind a
 [VPN](https://en.wikipedia.org/wiki/Virtual_private_network). As all of these services should be available, both on LAN
 and VPN, under a domain from a dynamic DNS provider as either `mydomain.ddnsprovider.tld/service` or
 `service.mydomain.ddnsprovider.tld` I eventually found myself in need of a
