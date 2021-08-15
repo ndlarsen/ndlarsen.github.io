@@ -226,13 +226,24 @@
   }
 }
 
-.post-subtitle {
+.post-alttitle {
+  font-style: italic;
   @include relative-font-size(1.625);
   letter-spacing: -1px;
   line-height: 1;
 
   @include media-query($on-laptop) {
     @include relative-font-size(1.25);
+  }
+}
+
+.post-subtitle {
+  @include relative-font-size(2.125);
+  letter-spacing: -1px;
+  line-height: 1;
+
+  @include media-query($on-laptop) {
+    @include relative-font-size(1.75);
   }
 }
 
