@@ -10,7 +10,7 @@ categories: [linux,docker,self-host,reverse proxy,web application gateway,cron,b
 ## Preface
 ---
 As promised in 
-[Building a simple web application gateway, part 1 - first steps]({% post_url 2021-08-14-building-a-web-application-gateway-part-1 %})
+[Building a simple web application gateway, part 1 - first steps]({% post_url 2021-08-14-building-a-simple-web-application-gateway-part-1 %})
 I would write a post on setting up the following two things:
 * a job renewing an entry at a dynamic DNS provider
 * a local DNS server
@@ -34,7 +34,7 @@ during this post we are only dealing with records of type `A`, which, in short, 
 ---
 Seeing as the amount of DDNS (dynamic DNS) providers is substantial, this is not really an easy task. In an attempt to
 narrow it down, I defined the following requirements, partially based on the needs described in the introduction post:
-[Building a simple web application gateway, part 1 - first steps]({% post_url 2021-08-14-building-a-web-application-gateway-part-1 %}):
+[Building a simple web application gateway, part 1 - first steps]({% post_url 2021-08-14-building-a-simple-web-application-gateway-part-1 %}):
 
 * it must provide an API (and not just the web interface) with functionality to
   - update A records

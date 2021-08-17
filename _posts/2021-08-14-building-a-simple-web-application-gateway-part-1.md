@@ -16,7 +16,7 @@ a point where I needed more available storage, I also wanted to self-host servic
 [Vaultwarden](https://github.com/dani-garcia/vaultwarden) (Bitwarden compatible backend) on my LAN behind a
 [VPN](https://en.wikipedia.org/wiki/Virtual_private_network). As all of these services should be available, both on LAN
 and VPN, under a domain from a dynamic DNS provider as either `mydomain.ddnsprovider.tld/service` or
-`service.mydomain.ddnsprovider.tld` I eventually found myself in need of a
+`service.mydomain.ddnsprovider.tld`, I eventually found myself in need of a
 [web application gateway](https://en.wikipedia.org/wiki/Application-level_gateway).
 
 While it is my impression (from what I have read and heard, I have no personal experience on this matter) that the
@@ -39,7 +39,7 @@ acquiring one such has become far easier (and cheaper) that is used to be, thank
 [Let's Encrypt](https://letsencrypt.org/) and others.
 
 I figured the solution would be to use Let's Encrypt as the source for certificates and as I had to acquire a proper
-certificate anyway, I though I might as well use this for the remaining services, such as Nextcloud, that I wanted to
+certificate anyway, I thought I might as well use this for the remaining services, such as Nextcloud, that I wanted to
 host. Thinking this would be fairly simple to do, I began...
 
 ## A few roadbumps
@@ -97,15 +97,15 @@ them are appropriate due to the latter in combination with following:
 4. while causing a lower degree of coupling between the certificate manager and the remaining setup, it requires
    functionality to be added to both the certificate manager as well as each affected service. It also requires addition
    of some sort of message broker functionality, either internally or externally
-5. a service to manage other services would inevitably be somewhat complex, also, t would duplicate functionality
-   already available in e.g. systemd, docker, s6 and various other init systems. However, using a preexisting init
-   system does not fully remove the coupling from the certificate manager to the remaining system as it would still need
-   to be aware of a series of services which would require manipulation after certificate renewal.
+5. a service to manage other services would inevitably be somewhat complex, also, it would duplicate functionality
+   already available in e.g. systemd, docker, s6 supervisord, sysvinit and various other init systems. However, using a
+   preexisting init system does not fully remove the coupling from the certificate manager to the remaining system as it
+   would still need to be aware of a series of services which would require manipulation after certificate renewal.
 
 Since is does not immediately appear possible to avoid the need to manipulate services after certificate renewal, one
-goal should be to reduce the number of services affected as much as possible. While the individual services are serving
-the SSL certificate themselves, this is not possible, so the question must be whether or not the SSL certificate can be
-served from elsewhere.
+goal should be to reduce the number of services affected as much as possible. If the individual services should be
+serving the SSL certificate themselves, this is not possible, so the question must be whether or not the SSL certificate
+can be served in a different manner or from elsewhere.
 
 #### A solution to B
 After digging around a while and talking to people far smarter than me, it appears that a solution could be a
@@ -119,21 +119,21 @@ a solution to this could be composed of the following tasks:
 * configure a reverse proxy via nginx to handle all requests to the backend services
 * have nginx serve the certificate
 * ensure reload of nginx after certificate renewal
-* ensure domain name resolution on the LA/VPN for all requests for `*.mydomain.ddnsprovider.tld` pointing towards the
-  reverse proxy
+* ensure domain name resolution while on the LAN or via VPN for all requests for `*.mydomain.ddnsprovider.tld` points
+  towards the reverse proxy
 
 ## What Web Application Gateway?
 ---
 In summary, I need one or more applications capable of fulfilling following requirements:
 
-* automate A record renewal
-* automate certificate renewal
-* reload nginx after certificate renewal
+* automatic A record renewal
+* automatic certificate renewal
+* automatic reload of nginx after certificate renewal
 * reverse proxying
 * DNS functionality
 
-I will containerize this via docker and even though there seems to be a widespread adherence to the concept of
-_one process per container_, I intend to divide the requirements based on how they conceptually align on the
+I will containerize this functionality via docker and even though there seems to be a widespread adherence to the
+concept of _one process per container_, I intend to divide the requirements based on how they conceptually align on the
 application level, that is, I will lump the together concepts that I think belongs together into the following
 containers/applications.
 
@@ -156,6 +156,6 @@ I plan on writing additional three posts as part of this series. The next relate
 on setting up a local DNS and the final part being related to certificate generation/renewal and setting up the reverse
 proxy.
 
-Part 2 in the series can be found here: [Building a simple web application gateway, part 2](building-a-simple-web-application-gateway-part-2)
+Part 2 in the series can be found here: [Building a simple web application gateway, part 2 - first steps]({% post_url 2021-08-15-building-a-simple-web-application-gateway-part-2 %})
 
 Enjoy.
